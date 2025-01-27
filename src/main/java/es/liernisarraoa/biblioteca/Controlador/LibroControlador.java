@@ -10,14 +10,18 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AlumnoControlador implements Initializable {
+public class LibroControlador implements Initializable {
+    @FXML
+    public Button volverPrincipal;
     @FXML
     private ImageView btnAniadir;
     @FXML
@@ -25,20 +29,19 @@ public class AlumnoControlador implements Initializable {
     @FXML
     private ImageView btnEliminar;
     @FXML
-    private Button volverPrincipal;
+    private ImageView btnPrestamo;
+    @FXML
+    private ImageView btnDevolucion;
+    @FXML
+    private ImageView btnHistorico;
 
     private Stage stage;
 
-    public void abrirFormularioAniadir(MouseEvent mouseEvent) {
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
-    public void abrirFormularioModificar(MouseEvent mouseEvent) {
-    }
-
-    public void abrirListaEliminar(MouseEvent mouseEvent) {
-    }
-
-    public void volverBiblioteca(ActionEvent actionEvent) {
+    public void volverPrincipal(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
         try {
@@ -60,6 +63,24 @@ public class AlumnoControlador implements Initializable {
         }
     }
 
+    public void abrirAniadirLibro(MouseEvent mouseEvent) {
+    }
+
+    public void abrirModificarLibro(ContextMenuEvent contextMenuEvent) {
+    }
+
+    public void abrirEliminarLibro(ContextMenuEvent contextMenuEvent) {
+    }
+
+    public void abrirPrestamo(MouseEvent mouseEvent) {
+    }
+
+    public void abrirDevolucion(MouseEvent mouseEvent) {
+    }
+
+    public void abrirHistorico(MouseEvent mouseEvent) {
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
@@ -67,15 +88,17 @@ public class AlumnoControlador implements Initializable {
         Tooltip tooltipModificar = new Tooltip("Modificar alumno");
         Tooltip tooltipEliminar = new Tooltip("Eliminar alumno");
         Tooltip tooltipVolver = new Tooltip("Volver a la página inicial");
+        Tooltip tooltipPrestamo = new Tooltip("Pedir un libro");
+        Tooltip tooltipDevolucion = new Tooltip("Devolver libro");
+        Tooltip tooltipHistorico = new Tooltip("Historial de prestamos");
 
         // Asignar el Tooltip al botón
         Tooltip.install(btnAniadir, tooltipAniadir);
         Tooltip.install(btnModificar, tooltipModificar);
         Tooltip.install(btnEliminar, tooltipEliminar);
+        Tooltip.install(btnPrestamo, tooltipPrestamo);
+        Tooltip.install(btnDevolucion, tooltipDevolucion);
+        Tooltip.install(btnHistorico, tooltipHistorico);
         Tooltip.install(volverPrincipal, tooltipVolver);
-    }
-
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 }

@@ -49,6 +49,26 @@ public class BibliotecaControlador implements Initializable {
     }
 
     public void abrirLibros(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Gestion de Libros");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            LibroControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
 
     public void setStage(Stage stage) {
