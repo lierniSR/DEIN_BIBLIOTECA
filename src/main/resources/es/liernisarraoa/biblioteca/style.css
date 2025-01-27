@@ -1,3 +1,7 @@
 BorderPane {
     -fx-background-color: linear-gradient(to bottom, #2222ff, #ffffff);
 }
+
+Button {
+    -fx-background-color: white;
+}

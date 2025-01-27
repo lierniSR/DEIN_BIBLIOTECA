@@ -51,7 +51,7 @@
       </Label>
    </top>
    <bottom>
-      <Button fx:id="volverPrincipal" mnemonicParsing="false" onAction="#volverBiblioteca" text="VOLVER" BorderPane.alignment="CENTER">
+      <Button fx:id="volverPrincipal" styleClass="btn primary" mnemonicParsing="false" onAction="#volverBiblioteca" text="VOLVER" BorderPane.alignment="CENTER">
          <font>
             <Font name="Arial Bold" size="14.0" />
          </font>

@@ -35,6 +35,10 @@ public class BibliotecaControlador implements Initializable {
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
+
+            //Pasar al controlador el Stage
+            AlumnoControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
