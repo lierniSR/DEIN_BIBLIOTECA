@@ -1,5 +1,7 @@
 package es.liernisarraoa.biblioteca.Conexion;
 
+import es.liernisarraoa.biblioteca.Propiedades.Propiedades;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -7,6 +9,7 @@ import java.util.Properties;
 
 public class ConexionDB {
     private final Connection conexion;
+    private final Propiedades propiedades = new Propiedades();
     /**
      * Inicia la conexion a la base de datos
      *
@@ -15,11 +18,12 @@ public class ConexionDB {
     public ConexionDB() throws SQLException {
         // los parametros de la conexion
         Properties connConfig = new Properties();
-        connConfig.setProperty("user", "root");
-        connConfig.setProperty("password", "WinRar3009*.");
+        connConfig.setProperty("user", propiedades.getProperty("db.usuario"));
+        connConfig.setProperty("password", propiedades.getProperty("db.contrasenia"));
         //la conexion en sí
-        conexion = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/libros?serverTimezone=Europe/Madrid", connConfig);
+        conexion = DriverManager.getConnection(propiedades.getProperty("db.url"), connConfig);
         conexion.setAutoCommit(true);
+        System.out.println("Conexion completada");
     }
     /**
      * Obtiene la conexion
