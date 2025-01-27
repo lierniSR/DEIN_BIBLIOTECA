@@ -1,9 +1,9 @@
-package es.liernisarraoa.biblioteca;
+package es.liernisarraoa.biblioteca.Controlador;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-public class HelloController {
+public class BibliotecaControlador {
     @FXML
     private Label welcomeText;
 
