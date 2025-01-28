@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoAniadirControlador" stylesheets="@../style.css" styleClass="border_pane">
+   <top>
+      <Label text="CREAR NUEVO ALUMNO" BorderPane.alignment="CENTER">
+         <font>
+            <Font name="Arial Bold Italic" size="24.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="20.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="DNI :">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfDNI" prefHeight="25.0" prefWidth="504.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="NOMBRE :">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfNombre" prefHeight="25.0" prefWidth="470.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label prefHeight="20.0" prefWidth="99.0" text="1º APELLIDO :">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="tfApellido1" prefHeight="25.0" prefWidth="449.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="2º APELLIDO :">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <TextField fx:id="tfApellido2" prefHeight="25.0" prefWidth="448.0">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="30.0" left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+   <bottom>
+      <HBox prefHeight="74.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="volverHome" fitHeight="80.0" fitWidth="80.0" onMouseClicked="#abrirHome" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Imagenes/home.png" />
+               </image>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Button fx:id="aniadirAlumno" mnemonicParsing="false" onAction="#aniadirAlumno" prefHeight="30.0" prefWidth="90.0" text="AÑADIR">
+               <HBox.margin>
+                  <Insets left="170.0" top="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="volverAlumno" mnemonicParsing="false" onAction="#volverAlumnos" text="VOLVER">
+               <HBox.margin>
+                  <Insets left="150.0" top="20.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="Arial Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+</BorderPane>

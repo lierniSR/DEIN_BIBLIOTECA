@@ -67,7 +67,6 @@ public class AlumnoDAO {
                     alert.setTitle("FXML");
                     alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
                     alert.showAndWait();
-                    throw new RuntimeException(e);
                 }
             }
         } catch (SQLException ex) {
@@ -92,5 +91,46 @@ public class AlumnoDAO {
             throw new RuntimeException(e);
         }
         return alumnos;
+    }
+
+    public static boolean modificarAlumno(Alumno alumno) {
+        int lineas = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "UPDATE alumno SET nombre = ?, apellido1 = ?, apellido2 = ? WHERE dni = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setString(1, alumno.getNombre());
+            pstmt.setString(2, alumno.getApellido1());
+            pstmt.setString(3, alumno.getApellido2());
+            pstmt.setString(4, alumno.getDni());
+            lineas = pstmt.executeUpdate();
+            conexionDB.cerrarConexion();
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("SQL");
+            alert.setContentText("No se ha podido ejecutar la sentencia.");
+            alert.showAndWait();
+            throw new RuntimeException(ex);
+        }
+        return lineas > 0;
+    }
+
+    public static boolean eliminarAlumno(Alumno alumno) {
+        int lineas = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "DELETE FROM alumno WHERE dni = ?";
+            PreparedStatement pstm = conexionDB.getConexion().prepareStatement(sql);
+            pstm.setString(1, alumno.getDni());
+            lineas = pstm.executeUpdate();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("SQL");
+            alert.setContentText("No se ha podido ejecutar la sentencia SQL.");
+            alert.showAndWait();
+        }
+        return lineas > 0;
     }
 }

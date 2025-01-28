@@ -2,7 +2,7 @@ package es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoControlador;
-import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos.HechoControlador;
+import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos.HechoEliminarControlador;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos.HechoModificarControlador;
 import es.liernisarraoa.biblioteca.Controlador.BibliotecaControlador;
 import es.liernisarraoa.biblioteca.DAO.AlumnoDAO;
@@ -13,7 +13,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
@@ -23,23 +26,15 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AlumnoModificarControlador implements Initializable {
+public class AlumnoEliminarControlador implements Initializable {
     @FXML
-    public ChoiceBox<Alumno> seleccionAlumnos;
-    @FXML
-    public TextField tfDNI;
-    @FXML
-    public TextField tfNombre;
-    @FXML
-    public TextField tfApellido1;
-    @FXML
-    public TextField tfApellido2;
+    public ListView<Alumno> seleccionAlumno;
     @FXML
     public ImageView iwHome;
     @FXML
-    public Button btnModificar;
+    public Button btnEliminar;
     @FXML
-    public Button volverAlumno;
+    public Button btnVolver;
 
     private Stage stage;
     private Stage modalStage;
@@ -67,13 +62,13 @@ public class AlumnoModificarControlador implements Initializable {
         }
     }
 
-    public void modificarAlumno(ActionEvent actionEvent) {
-        if(!tfDNI.getText().isEmpty() && !tfNombre.getText().isEmpty() && !tfApellido1.getText().isEmpty() && !tfApellido2.getText().isEmpty() && tfDNI.getText().length() == 9){
-            Alumno alumno = new Alumno(tfDNI.getText(), tfNombre.getText(), tfApellido1.getText(), tfApellido2.getText());
-            if(AlumnoDAO.modificarAlumno(alumno)){
+    public void eliminarAlumno(ActionEvent actionEvent) {
+        Alumno alumno = seleccionAlumno.getSelectionModel().getSelectedItem();
+        if(alumno != null){
+            if(AlumnoDAO.eliminarAlumno(alumno)){
                 //Esto si el controlador necesita hacer algo en la ventana principal
                 // Cargar el FXML de la ventana modal
-                FXMLLoader loader =  new FXMLLoader(Biblioteca.class.getResource("Alumno/dialogoBienModificar.fxml"));
+                FXMLLoader loader =  new FXMLLoader(Biblioteca.class.getResource("Alumno/dialogoBienEliminar.fxml"));
                 Parent root = null;
                 try {
                     root = loader.load();
@@ -82,17 +77,15 @@ public class AlumnoModificarControlador implements Initializable {
 
                     modalStage.setScene(modalScene);
                     modalStage.initModality(Modality.APPLICATION_MODAL);
-                    modalStage.setTitle("SE HA MODIFICADO");
+                    modalStage.setTitle("SE HA ELIMINADO");
                     modalStage.setResizable(false);
                     //Pasar al controlador el Stage
-                    HechoModificarControlador controlador = loader.getController();
+                    HechoEliminarControlador controlador = loader.getController();
                     controlador.setStage(modalStage);
                     modalStage.showAndWait();
 
                     // Actualizar los elementos del ListView
-                    seleccionAlumnos.getItems().setAll(AlumnoDAO.listaDeAlumnos());
-                    seleccionAlumnos.getSelectionModel().select(new Alumno(tfDNI.getText(), tfNombre.getText(), tfApellido1.getText(), tfApellido2.getText()));
-
+                    seleccionAlumno.getItems().setAll(AlumnoDAO.listaDeAlumnos());
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
@@ -105,12 +98,11 @@ public class AlumnoModificarControlador implements Initializable {
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
-            alert.setTitle("NO ACTUALIZADO");
-            alert.setContentText("El alumno que acabas de insertar no se ha podido actualizar.\n" +
-                    "Todos los campos que aparecen en el formulario tienen que estar llenos.\n" +
-                    "El campo DNI no puede tener ni más ni menos de 9 carácteres.");
+            alert.setTitle("SELECCION");
+            alert.setContentText("No has seleccionado ningún alumno para eliminar.");
             alert.showAndWait();
         }
+
     }
 
     public void volverHome(MouseEvent mouseEvent) {
@@ -142,36 +134,17 @@ public class AlumnoModificarControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
-        Tooltip tootltipSeleccionAlumnos = new Tooltip("Selecciona un alumno");
-        Tooltip tooltiptfDNI = new Tooltip("Campo DNI");
-        Tooltip tooltiptfNombre = new Tooltip("Campo nombre");
-        Tooltip tooltiptfApellido1 = new Tooltip("Campo 1º apellido");
-        Tooltip tooltiptfApellido2 = new Tooltip("Campo 2º apellido");
-        Tooltip tooltipIwHome = new Tooltip("Volver a la pagina inicial");
-        Tooltip tooltipBtnModificar = new Tooltip("Guardar los cambios");
+        Tooltip tooltipLista = new Tooltip("Lista de alumnos");
+        Tooltip tooltipHome = new Tooltip("Volver a la pagina inicial");
         Tooltip tooltipVolverAlumno = new Tooltip("Volver a la pagina de alumnos");
+        Tooltip tooltipEliminar = new Tooltip("Eliminar alumno seleccionado");
 
         // Asignar el Tooltip al botón
-        Tooltip.install(seleccionAlumnos, tootltipSeleccionAlumnos);
-        Tooltip.install(tfDNI, tooltiptfDNI);
-        Tooltip.install(tfNombre, tooltiptfNombre);
-        Tooltip.install(tfApellido1, tooltiptfApellido1);
-        Tooltip.install(tfApellido2, tooltiptfApellido2);
-        Tooltip.install(iwHome, tooltipIwHome);
-        Tooltip.install(btnModificar, tooltipBtnModificar);
-        Tooltip.install(volverAlumno, tooltipVolverAlumno);
+        Tooltip.install(btnEliminar, tooltipEliminar);
+        Tooltip.install(btnVolver, tooltipVolverAlumno);
+        Tooltip.install(iwHome, tooltipHome);
+        Tooltip.install(seleccionAlumno, tooltipLista);
 
-        seleccionAlumnos.getItems().addAll(AlumnoDAO.listaDeAlumnos());
-        seleccionAlumnos.setOnAction(actionEvent ->{
-                    Alumno alumno = seleccionAlumnos.getSelectionModel().getSelectedItem();
-                    tfNombre.setDisable(false);
-                    tfApellido1.setDisable(false);
-                    tfApellido2.setDisable(false);
-
-                    tfDNI.setText(alumno.getDni());
-                    tfNombre.setText(alumno.getNombre());
-                    tfApellido1.setText(alumno.getApellido1());
-                    tfApellido2.setText(alumno.getApellido2());
-                });
+        seleccionAlumno.getItems().addAll(AlumnoDAO.listaDeAlumnos());
     }
 }

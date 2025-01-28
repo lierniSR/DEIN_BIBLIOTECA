@@ -15,4 +15,6 @@ module es.liernisarraoa.biblioteca {
     opens es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos to javafx.fxml;
     exports es.liernisarraoa.biblioteca.Modelo;
     opens es.liernisarraoa.biblioteca.Modelo to javafx.fxml;
+    exports es.liernisarraoa.biblioteca.Controlador.LibroOpciones;
+    opens es.liernisarraoa.biblioteca.Controlador.LibroOpciones to javafx.fxml;
 }

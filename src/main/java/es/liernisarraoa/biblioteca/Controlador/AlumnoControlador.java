@@ -2,6 +2,7 @@ package es.liernisarraoa.biblioteca.Controlador;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoAniadirControlador;
+import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoEliminarControlador;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoModificarControlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -76,6 +77,25 @@ public class AlumnoControlador implements Initializable {
     }
 
     public void abrirListaEliminar(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Alumno/eliminarAlumno.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Eliminar alumno");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            AlumnoEliminarControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+        }
     }
 
     public void volverBiblioteca(ActionEvent actionEvent) {
