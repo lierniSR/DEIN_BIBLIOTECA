@@ -27,7 +27,6 @@ public class AlumnoDAO {
     private static Scene modalScene;
 
     public static boolean insertarAlumno(Alumno alumno){
-        String opcion = "Insertar";
         int lineas = 0;
         try {
             conexionDB = new ConexionDB();

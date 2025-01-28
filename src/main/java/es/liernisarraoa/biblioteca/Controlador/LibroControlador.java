@@ -2,6 +2,7 @@ package es.liernisarraoa.biblioteca.Controlador;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoEliminarControlador;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroAniadirControlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -65,17 +66,17 @@ public class LibroControlador implements Initializable {
     }
 
     public void abrirAniadirLibro(MouseEvent mouseEvent) {
-        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Alumno/eliminarAlumno.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/aniadirLibro.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 600, 400);
-            stage.setTitle("Eliminar alumno");
+            stage.setTitle("Añadir libro");
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
 
             //Pasar al controlador el Stage
-            AlumnoEliminarControlador controlador = fxmlLoader.getController();
+            LibroAniadirControlador controlador = fxmlLoader.getController();
             controlador.setStage(stage);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

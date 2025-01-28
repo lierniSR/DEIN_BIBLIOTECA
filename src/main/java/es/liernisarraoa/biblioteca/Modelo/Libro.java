@@ -143,4 +143,22 @@ public class Libro {
     public void setBaja(Integer baja) {
         this.baja = baja;
     }
+
+    @Override
+    public String toString() {
+        if(baja == 1){
+            return codigo.toString() + " --> " +
+                    "Titulo: " + titulo + "/" +
+                    "Autor: " + autor + "/" +
+                    "Editorial: " + editorial + "/" +
+                    "Estado: " + estado + "/" +
+                    "Esta de baja. ";
+        }
+        return codigo.toString() + " --> " +
+                "Titulo: " + titulo + "/" +
+                "Autor: " + autor + "/" +
+                "Editorial: " + editorial + "/" +
+                "Estado: " + estado + "/" +
+                "No esta de baja. ";
+    }
 }

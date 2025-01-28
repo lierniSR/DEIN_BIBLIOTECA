@@ -90,6 +90,10 @@ public class AlumnoAniadirControlador implements Initializable {
                     HechoControlador controlador = loader.getController();
                     controlador.setStage(modalStage);
                     modalStage.showAndWait();
+                    tfDNI.setText("");
+                    tfNombre.setText("");
+                    tfApellido1.setText("");
+                    tfApellido2.setText("");
 
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -109,10 +113,6 @@ public class AlumnoAniadirControlador implements Initializable {
                     "El campo DNI no puede tener ni más ni menos de 9 carácteres.");
             alert.showAndWait();
         }
-        tfDNI.setText("");
-        tfNombre.setText("");
-        tfApellido1.setText("");
-        tfApellido2.setText("");
     }
 
     public void volverAlumnos(ActionEvent actionEvent) {
