@@ -100,4 +100,13 @@ public class Alumno {
     public void setApellido2(String apellido2) {
         this.apellido2 = apellido2;
     }
+
+    @Override
+    public String toString() {
+        return nombre +
+                "--> DNI: " + dni +
+                " / Nombre: " + nombre +
+                " / 1º Apellido: " + apellido1 +
+                " / 2º Apellido: " + apellido2;
+    }
 }

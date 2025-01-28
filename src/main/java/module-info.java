@@ -9,4 +9,10 @@ module es.liernisarraoa.biblioteca {
     exports es.liernisarraoa.biblioteca;
     exports es.liernisarraoa.biblioteca.Controlador;
     opens es.liernisarraoa.biblioteca.Controlador to javafx.fxml;
+    exports es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones;
+    opens es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones to javafx.fxml;
+    exports es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos;
+    opens es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos to javafx.fxml;
+    exports es.liernisarraoa.biblioteca.Modelo;
+    opens es.liernisarraoa.biblioteca.Modelo to javafx.fxml;
 }

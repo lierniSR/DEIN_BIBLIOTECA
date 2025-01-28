@@ -1,7 +1,26 @@
-BorderPane {
+.border_pane {
     -fx-background-color: linear-gradient(to bottom, #2222ff, #ffffff);
 }
 
 Button {
     -fx-background-color: white;
+}
+
+.dialog_info {
+    -fx-background-color: linear-gradient(to bottom, #3aff23, #ffffff);
+}
+
+.dialog_error{
+    -fx-background-color: linear-gradient(to bottom, #ff2323, #ffffff);
+}
+
+.list_view {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-control-inner-background: transparent;
+    -fx-border-color: transparent;
+}
+
+.list_view .list-cell {
+    -fx-text-fill: black;
 }
