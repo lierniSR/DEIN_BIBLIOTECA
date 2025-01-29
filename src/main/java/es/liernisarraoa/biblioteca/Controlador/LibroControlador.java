@@ -3,6 +3,9 @@ package es.liernisarraoa.biblioteca.Controlador;
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoEliminarControlador;
 import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroAniadirControlador;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroEliminarControlador;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroModificarControlador;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroPrestamoControlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -87,13 +90,70 @@ public class LibroControlador implements Initializable {
         }
     }
 
-    public void abrirModificarLibro(ContextMenuEvent contextMenuEvent) {
+    public void abrirModificarLibro(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/modificarLibro.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Modificar libro");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            LibroModificarControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+        }
     }
 
-    public void abrirEliminarLibro(ContextMenuEvent contextMenuEvent) {
+    public void abrirEliminarLibro(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/eliminarLibro.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Baja/Altas de libros");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            LibroEliminarControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+        }
     }
 
     public void abrirPrestamo(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/prestamoLibro.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Prestamos de libros");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            LibroPrestamoControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+        }
     }
 
     public void abrirDevolucion(MouseEvent mouseEvent) {
@@ -105,9 +165,9 @@ public class LibroControlador implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
-        Tooltip tooltipAniadir = new Tooltip("Nuevo alumno");
-        Tooltip tooltipModificar = new Tooltip("Modificar alumno");
-        Tooltip tooltipEliminar = new Tooltip("Eliminar alumno");
+        Tooltip tooltipAniadir = new Tooltip("Nuevo libro");
+        Tooltip tooltipModificar = new Tooltip("Modificar libro");
+        Tooltip tooltipEliminar = new Tooltip("Eliminar libro");
         Tooltip tooltipVolver = new Tooltip("Volver a la página inicial");
         Tooltip tooltipPrestamo = new Tooltip("Pedir un libro");
         Tooltip tooltipDevolucion = new Tooltip("Devolver libro");

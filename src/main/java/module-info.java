@@ -3,6 +3,7 @@ module es.liernisarraoa.biblioteca {
     requires javafx.fxml;
     requires java.sql;
     requires java.desktop;
+    requires org.checkerframework.checker.qual;
 
 
     opens es.liernisarraoa.biblioteca to javafx.fxml;

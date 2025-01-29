@@ -91,4 +91,87 @@ public class LibroDAO {
         }
         return libros;
     }
+
+    public static boolean actualizarLibro(Libro libro) {
+        int lineas = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "UPDATE libro SET titulo = ?, autor = ?, editorial = ?, estado = ?, baja = ? WHERE codigo = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setString(1, libro.getTitulo());
+            pstmt.setString(2, libro.getAutor());
+            pstmt.setString(3, libro.getEditorial());
+            pstmt.setString(4, libro.getEstado());
+            pstmt.setInt(5, libro.getBaja());
+            pstmt.setInt(6, libro.getCodigo());
+            lineas = pstmt.executeUpdate();
+            conexionDB.cerrarConexion();
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("SQL");
+            alert.setContentText("No se ha podido ejecutar la sentencia.");
+            alert.showAndWait();
+            throw new RuntimeException(ex);
+        }
+        return lineas > 0;
+    }
+
+    public static boolean eliminarLibro(Libro libro) {
+        int lineas = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "UPDATE libro SET baja = ? WHERE codigo = ?";
+            PreparedStatement pstm = conexionDB.getConexion().prepareStatement(sql);
+            if(libro.getBaja() == 0){
+                pstm.setInt(1, 1);
+            } else {
+                pstm.setInt(1, 0);
+            }
+            pstm.setInt(2, libro.getCodigo());
+            lineas = pstm.executeUpdate();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("SQL");
+            alert.setContentText("No se ha podido ejecutar la sentencia SQL.");
+            alert.showAndWait();
+        }
+        return lineas > 0;
+    }
+
+    public static ArrayList<Libro> listarLibrosNoPrestados(){
+        ArrayList<Libro> libros = new ArrayList<Libro>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT * FROM libro WHERE codigo NOT IN (SELECT codigo_libro FROM prestamo)";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                Libro libro = new Libro(resultados.getInt(1), resultados.getString(2), resultados.getString(3), resultados.getString(4), resultados.getString(5), resultados.getInt(6));
+                libros.add(libro);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return libros;
+    }
+
+    public static ArrayList<String> listaTitulos(){
+        ArrayList<String> libros = new ArrayList<String>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT titulo FROM libro WHERE codigo NOT IN (SELECT codigo_libro FROM prestamo)";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                libros.add(resultados.getString(1));
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return libros;
+    }
 }

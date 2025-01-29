@@ -35,7 +35,7 @@
                         <Insets left="30.0" top="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="btnModificar" fitHeight="150.0" fitWidth="200.0" onContextMenuRequested="#abrirModificarLibro" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnModificar" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#abrirModificarLibro" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Imagenes/modificar.png" />
                      </image>
@@ -43,7 +43,7 @@
                         <Insets left="50.0" top="10.0" />
                      </HBox.margin>
                   </ImageView>
-                  <ImageView fx:id="btnEliminar" fitHeight="150.0" fitWidth="200.0" onContextMenuRequested="#abrirEliminarLibro" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="btnEliminar" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#abrirEliminarLibro" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Imagenes/eliminar.png" />
                      </image>
