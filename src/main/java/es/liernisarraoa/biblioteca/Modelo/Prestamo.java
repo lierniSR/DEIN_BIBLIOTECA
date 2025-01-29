@@ -1,5 +1,6 @@
 package es.liernisarraoa.biblioteca.Modelo;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ public class Prestamo {
     private Integer id_prestamo;
     private String dni_alumno;
     private Integer codigo_libro;
-    private Date fecha_prestamo;
+    private LocalDate fecha_prestamo;
 
     /**
      * Constructor para la clase con todos los atributos
@@ -25,7 +26,7 @@ public class Prestamo {
      * @param codigo_libro
      * @param fecha_prestamo
      */
-    public Prestamo(Integer id_prestamo, String dni_alumno, Integer codigo_libro, Date fecha_prestamo){
+    public Prestamo(Integer id_prestamo, String dni_alumno, Integer codigo_libro, LocalDate fecha_prestamo){
         this.id_prestamo = id_prestamo;
         this.dni_alumno = dni_alumno;
         this.codigo_libro = codigo_libro;
@@ -86,7 +87,7 @@ public class Prestamo {
      *
      * @return La fecha donde se prestó el libro
      */
-    public Date getFecha_prestamo() {
+    public LocalDate getFecha_prestamo() {
         return fecha_prestamo;
     }
 
@@ -95,7 +96,15 @@ public class Prestamo {
      *
      * @param fecha_prestamo
      */
-    public void setFecha_prestamo(Date fecha_prestamo) {
+    public void setFecha_prestamo(LocalDate fecha_prestamo) {
         this.fecha_prestamo = fecha_prestamo;
+    }
+
+    @Override
+    public String toString() {
+        return id_prestamo + "--> " +
+                "ALUMNO: " + dni_alumno + " / " +
+                "LIBRO: " + codigo_libro + " / " +
+                "FECHA DE PRESTAMO: " + fecha_prestamo;
     }
 }

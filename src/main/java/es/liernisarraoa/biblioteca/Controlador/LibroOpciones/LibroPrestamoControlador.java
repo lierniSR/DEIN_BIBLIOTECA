@@ -113,19 +113,17 @@ public class LibroPrestamoControlador implements Initializable {
                 stage.setTitle("Prestamos de libros");
                 stage.setResizable(false);
                 stage.setScene(scene);
+                stage.show();
+
                 //Pasar al controlador el Stage
                 LibroPrestamoFormularioControlador controlador = fxmlLoader.getController();
                 controlador.setStage(stage);
-                stage.show();
-
-
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("FXML");
                 alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
                 alert.showAndWait();
-                e.printStackTrace();
             }
     }
 }

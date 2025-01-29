@@ -133,11 +133,11 @@ public class AlumnoDAO {
         return lineas > 0;
     }
 
-    public static ArrayList<String> listaNombres(){
+    public static ArrayList<String> listaDNI(){
         ArrayList<String> alumnos = new ArrayList<String>();
         try {
             conexionDB = new ConexionDB();
-            String sql = "SELECT nombre FROM alumno";
+            String sql = "SELECT dni FROM alumno";
             PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
             ResultSet resultados = pstmt.executeQuery();
             while(resultados.next()){

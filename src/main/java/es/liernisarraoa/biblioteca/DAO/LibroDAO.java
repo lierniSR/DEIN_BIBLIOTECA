@@ -174,4 +174,22 @@ public class LibroDAO {
         }
         return libros;
     }
+
+    public static Integer conseguirCodigoConTitulo(String titulo) {
+        int codigo_libro = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT codigo FROM libro WHERE titulo = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setString(1, titulo);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                codigo_libro = resultados.getInt(1);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return codigo_libro;
+    }
 }

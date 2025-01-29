@@ -167,7 +167,7 @@ public class LibroControlador implements Initializable {
         // Crear un Tooltip
         Tooltip tooltipAniadir = new Tooltip("Nuevo libro");
         Tooltip tooltipModificar = new Tooltip("Modificar libro");
-        Tooltip tooltipEliminar = new Tooltip("Eliminar libro");
+        Tooltip tooltipEliminar = new Tooltip("Dar de baja/alta libro");
         Tooltip tooltipVolver = new Tooltip("Volver a la página inicial");
         Tooltip tooltipPrestamo = new Tooltip("Pedir un libro");
         Tooltip tooltipDevolucion = new Tooltip("Devolver libro");
