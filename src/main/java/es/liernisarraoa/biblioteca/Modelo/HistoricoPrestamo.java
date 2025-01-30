@@ -126,6 +126,6 @@ public class HistoricoPrestamo {
                 " DNI ALUMNO: " + dni_alumno + " / " +
                 "CODIGO DE LIBRO: " + codigo_libro + " / " +
                 "FECHA PRESTAMO: " + fecha_prestamo + " / " +
-                "FECHA DEVOLUCION" + fecha_devolucion;
+                "FECHA DEVOLUCION: " + fecha_devolucion;
     }
 }

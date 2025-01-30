@@ -92,7 +92,11 @@ public class LibroPrestamoFormularioControlador implements Initializable {
                         HechoPrestamoControlador controlador = loader.getController();
                         controlador.setStage(modalStage);
                         modalStage.showAndWait();
+                        cbCodigoLibro.getSelectionModel().clearSelection();
                         cbCodigoLibro.getItems().setAll(LibroDAO.listaTitulos());
+                        cbAlumno.getSelectionModel().clearSelection();
+                        tfIdPrestamo.setText("");
+                        dpFechaPrestamo.setValue(null);
                     } catch (IOException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText(null);

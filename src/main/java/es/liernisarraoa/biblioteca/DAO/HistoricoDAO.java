@@ -63,4 +63,80 @@ public class HistoricoDAO {
         }
         return historicos;
     }
+
+    public static ArrayList<HistoricoPrestamo> filtrarPorCodigoLibro(Integer codigo_libro) {
+        ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT * FROM historico_prestamo WHERE codigo_libro = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setInt(1, codigo_libro);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                HistoricoPrestamo historicoPrestamo = new HistoricoPrestamo(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getDate(4), resultados.getDate(5));
+                historicos.add(historicoPrestamo);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return historicos;
+    }
+
+    public static ArrayList<HistoricoPrestamo> filtrarPorDNI(String DNI) {
+        ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT * FROM historico_prestamo WHERE dni_alumno = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setString(1, DNI);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                HistoricoPrestamo historicoPrestamo = new HistoricoPrestamo(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getDate(4), resultados.getDate(5));
+                historicos.add(historicoPrestamo);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return historicos;
+    }
+
+    public static ArrayList<HistoricoPrestamo> filtrarPorFechaPrestamo(Date fechaPrestamo) {
+        ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT * FROM historico_prestamo WHERE fecha_prestamo = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setDate(1, fechaPrestamo);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                HistoricoPrestamo historicoPrestamo = new HistoricoPrestamo(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getDate(4), resultados.getDate(5));
+                historicos.add(historicoPrestamo);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return historicos;
+    }
+
+    public static ArrayList<HistoricoPrestamo> filtrarPorFechaDevolucion(Date fechaDevolucion) {
+        ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT * FROM historico_prestamo WHERE fecha_devolucion = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setDate(1, fechaDevolucion);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                HistoricoPrestamo historicoPrestamo = new HistoricoPrestamo(resultados.getInt(1), resultados.getString(2), resultados.getInt(3), resultados.getDate(4), resultados.getDate(5));
+                historicos.add(historicoPrestamo);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return historicos;
+    }
 }

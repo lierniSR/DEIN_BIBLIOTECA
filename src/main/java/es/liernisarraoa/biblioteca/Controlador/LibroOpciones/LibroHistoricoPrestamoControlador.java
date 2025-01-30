@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.util.ResourceBundle;
 
 public class LibroHistoricoPrestamoControlador implements Initializable {
@@ -84,6 +85,48 @@ public class LibroHistoricoPrestamoControlador implements Initializable {
     }
 
     public void filtrar(MouseEvent mouseEvent) {
+        int filtrado = 0;
+        if(!tfCodigoLibro.getText().isEmpty()){
+            filtrado++;
+        }
+        if(!tfDNI.getText().isEmpty()){
+            filtrado++;
+        }
+        if(dpFechaDevolucion.getValue() != null){
+            filtrado++;
+        }
+        if(dpFechaPrestamo.getValue() != null){
+            filtrado++;
+        }
+        System.out.println(filtrado);
+        if(filtrado == 0){
+            listaHistorico.getItems().setAll(HistoricoDAO.listaDelHistorial());
+        }
+        if(filtrado == 1){
+            if(!tfCodigoLibro.getText().isEmpty()){
+                try{
+                    int codigo_libro = Integer.parseInt(tfCodigoLibro.getText());
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException(e);
+                }
+                listaHistorico.getItems().setAll(HistoricoDAO.filtrarPorCodigoLibro(Integer.parseInt(tfCodigoLibro.getText())));
+            }
+            if(!tfDNI.getText().isEmpty()){
+                listaHistorico.getItems().setAll(HistoricoDAO.filtrarPorDNI(tfDNI.getText()));
+            }
+            if(dpFechaPrestamo.getValue() != null){
+                listaHistorico.getItems().setAll(HistoricoDAO.filtrarPorFechaPrestamo(Date.valueOf(dpFechaPrestamo.getValue())));
+            }
+            if(dpFechaDevolucion.getValue() != null){
+                listaHistorico.getItems().setAll(HistoricoDAO.filtrarPorFechaDevolucion(Date.valueOf(tfCodigoLibro.getText())));
+            }
+        } else if(filtrado > 1){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FILTRADO");
+            alert.setContentText("Este programa no admite utiliza dos o más filtros a la vez");
+            alert.showAndWait();
+        }
     }
 
     public void setStage(Stage stage) {
