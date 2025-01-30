@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaPrestamo" stylesheets="@../style.css" styleClass="border_pane">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaPrestamoControlador" stylesheets="@../style.css" styleClass="border_pane">
    <center>
       <ListView fx:id="listaPrestamos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" styleClass="list_view">
          <BorderPane.margin>

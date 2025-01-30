@@ -7,6 +7,7 @@ import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos.HechoContr
 import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos.HechoModificarControlador;
 import es.liernisarraoa.biblioteca.DAO.AlumnoDAO;
 import es.liernisarraoa.biblioteca.DAO.LibroDAO;
+import es.liernisarraoa.biblioteca.DAO.PrestamoDAO;
 import es.liernisarraoa.biblioteca.Modelo.Alumno;
 import es.liernisarraoa.biblioteca.Modelo.Libro;
 import javafx.event.ActionEvent;
@@ -23,7 +24,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 public class LibroModificarControlador implements Initializable {
     @FXML
@@ -50,6 +54,7 @@ public class LibroModificarControlador implements Initializable {
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
+    private final Integer baja = 0;
 
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
@@ -74,20 +79,25 @@ public class LibroModificarControlador implements Initializable {
     }
 
     public void modificarLibro(ActionEvent actionEvent) {
-        if(!tfTitulo.getText().isEmpty() && !tfAutor.getText().isEmpty() && !tfEditorial.getText().isEmpty() && !seleccionEstado.getSelectionModel().getSelectedItem().isEmpty()){
-            Libro libro = null;
-            if(cbBaja.isSelected()){
-                libro = new Libro(Integer.parseInt(tfCodigo.getText()), tfTitulo.getText(),tfAutor.getText(), tfEditorial.getText(), seleccionEstado.getSelectionModel().getSelectedItem(), 1);
-            } else {
-                libro = new Libro(Integer.parseInt(tfCodigo.getText()), tfTitulo.getText(),tfAutor.getText(), tfEditorial.getText(), seleccionEstado.getSelectionModel().getSelectedItem(), 2);
-            }
-            if(LibroDAO.actualizarLibro(libro)) {
-                //Esto si el controlador necesita hacer algo en la ventana principal
-                // Cargar el FXML de la ventana modal
-                FXMLLoader loader =  new FXMLLoader(Biblioteca.class.getResource("Libro/dialogoBienModificar.fxml"));
-                Parent root = null;
+        int nuevaBaja = cbBaja.isSelected() ? 1 : 0; // Determinar el nuevo estado
+
+        if (!tfTitulo.getText().isEmpty() && !tfAutor.getText().isEmpty() && !tfEditorial.getText().isEmpty()
+                && seleccionEstado.getSelectionModel().getSelectedItem() != null) {
+
+            Libro libro = new Libro(
+                    Integer.parseInt(tfCodigo.getText()),
+                    tfTitulo.getText(),
+                    tfAutor.getText(),
+                    tfEditorial.getText(),
+                    seleccionEstado.getSelectionModel().getSelectedItem(),
+                    nuevaBaja
+            );
+
+            if (LibroDAO.actualizarLibro(libro)) {
+                // Mostrar el modal de confirmación
                 try {
-                    root = loader.load();
+                    FXMLLoader loader = new FXMLLoader(Biblioteca.class.getResource("Libro/dialogoBienModificar.fxml"));
+                    Parent root = loader.load();
                     modalStage = new Stage();
                     modalScene = new Scene(root);
 
@@ -95,23 +105,41 @@ public class LibroModificarControlador implements Initializable {
                     modalStage.initModality(Modality.APPLICATION_MODAL);
                     modalStage.setTitle("SE HA GUARDADO");
                     modalStage.setResizable(false);
-                    //Pasar al controlador el Stage
+
                     HechoModificarControlador controlador = loader.getController();
                     controlador.setStage(modalStage);
                     modalStage.showAndWait();
 
-                    // Actualizar los elementos del ListView
+                    // Actualizar ListView
                     seleccionLibro.getItems().setAll(LibroDAO.listaDeLibros());
-                    if(cbBaja.isSelected()){
-                        seleccionLibro.getSelectionModel().select(new Libro(Integer.parseInt(tfCodigo.getText()), tfTitulo.getText(),tfAutor.getText(), tfEditorial.getText(), seleccionEstado.getSelectionModel().getSelectedItem(), 1));
-                    } else {
-                        seleccionLibro.getSelectionModel().select(new Libro(Integer.parseInt(tfCodigo.getText()), tfTitulo.getText(),tfAutor.getText(), tfEditorial.getText(), seleccionEstado.getSelectionModel().getSelectedItem(), 2));
+                    seleccionEstado.getItems().setAll(LibroDAO.listaTitulosEnPrestamo());
+                    seleccionLibro.getSelectionModel().select(libro);
+                    System.out.println(baja);
+                    System.out.println(nuevaBaja);
+                    // Verificar si el estado cambió
+                    if (nuevaBaja != baja) {
+                        System.out.println("Cambio de estado detectado.");
+
+                        // Obtener la lista de títulos en préstamo en un Set para búsqueda rápida
+                        Set<String> titulosEnPrestamo = new HashSet<>(LibroDAO.listaTitulosEnPrestamo());
+
+                        if (titulosEnPrestamo.contains(tfTitulo.getText())) {
+                            // Eliminar préstamo si el libro estaba en la lista
+                            PrestamoDAO.eliminarPrestamoPorLibro(tfCodigo.getText());
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setHeaderText(null);
+                            alert.setTitle("PRESTAMOS");
+                            alert.setContentText("Se ha eliminado el préstamo asociado al libro.");
+                            alert.showAndWait();
+                        }
                     }
+
                 } catch (IOException e) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setHeaderText(null);
                     alert.setTitle("FXML");
-                    alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+                    alert.setContentText("El archivo que contiene la visualización de la pestaña no se ha podido cargar.");
                     alert.showAndWait();
                     throw new RuntimeException(e);
                 }
@@ -119,11 +147,10 @@ public class LibroModificarControlador implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
                 alert.setTitle("NO ACTUALIZADO");
-                alert.setContentText("El libro que acabas de intentar actualizar no se ha podido guardar.\n" +
-                        "Todos los campos que aparecen en el formulario tienen que estar llenos.");
+                alert.setContentText("El libro no se ha podido guardar.\nTodos los campos deben estar llenos.");
                 alert.showAndWait();
             }
-            }
+        }
     }
 
     public void volverLibro(ActionEvent actionEvent) {

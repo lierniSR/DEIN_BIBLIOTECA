@@ -1,8 +1,7 @@
 package es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaLibros;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaPrestamo;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaPrestamoControlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +42,7 @@ public class HechoPrestamoControlador implements Initializable {
             stage.show();
 
             //Pasar al controlador el Stage
-            ListaPrestamo controlador = fxmlLoader.getController();
+            ListaPrestamoControlador controlador = fxmlLoader.getController();
             controlador.setStage(stage);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

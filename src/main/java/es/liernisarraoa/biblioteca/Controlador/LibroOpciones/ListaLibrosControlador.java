@@ -1,8 +1,6 @@
 package es.liernisarraoa.biblioteca.Controlador.LibroOpciones;
 
-import es.liernisarraoa.biblioteca.DAO.AlumnoDAO;
 import es.liernisarraoa.biblioteca.DAO.LibroDAO;
-import es.liernisarraoa.biblioteca.Modelo.Alumno;
 import es.liernisarraoa.biblioteca.Modelo.Libro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,7 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ListaLibros implements Initializable {
+public class ListaLibrosControlador implements Initializable {
     @FXML
     public Button btnVolver;
     @FXML

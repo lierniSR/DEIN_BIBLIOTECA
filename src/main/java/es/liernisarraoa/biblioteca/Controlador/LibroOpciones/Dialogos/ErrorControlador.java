@@ -1,8 +1,7 @@
 package es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
-import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.ListaAlumnos;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaLibros;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.ListaLibrosControlador;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -62,7 +61,7 @@ public class ErrorControlador implements Initializable {
             stage.show();
 
             //Pasar al controlador el Stage
-            ListaLibros controlador = fxmlLoader.getController();
+            ListaLibrosControlador controlador = fxmlLoader.getController();
             controlador.setStage(stage);
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);

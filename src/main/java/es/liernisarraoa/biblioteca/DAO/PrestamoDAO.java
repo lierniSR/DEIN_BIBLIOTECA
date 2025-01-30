@@ -90,4 +90,21 @@ public class PrestamoDAO {
         }
         return prestamos;
     }
+
+    public static void eliminarPrestamoPorLibro(String codigoLibro) {
+        int lineas = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "DELETE FROM prestamo WHERE codigo_libro = ?";
+            PreparedStatement pstm = conexionDB.getConexion().prepareStatement(sql);
+            pstm.setInt(1, Integer.parseInt(codigoLibro));
+            lineas = pstm.executeUpdate();
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("SQL");
+            alert.setContentText("No se ha podido ejecutar la sentencia SQL.");
+            alert.showAndWait();
+        }
+    }
 }

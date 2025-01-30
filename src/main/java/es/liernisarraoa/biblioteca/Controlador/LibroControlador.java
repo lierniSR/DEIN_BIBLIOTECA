@@ -2,10 +2,7 @@ package es.liernisarraoa.biblioteca.Controlador;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoEliminarControlador;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroAniadirControlador;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroEliminarControlador;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroModificarControlador;
-import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.LibroPrestamoControlador;
+import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -157,9 +154,47 @@ public class LibroControlador implements Initializable {
     }
 
     public void abrirDevolucion(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/devolverLibro.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("Devolver libro");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            LibroDevolverControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+        }
     }
 
     public void abrirHistorico(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/historicoPrestamos.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("HISTORICO");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            LibroHistoricoPrestamoControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+        }
     }
 
     @Override

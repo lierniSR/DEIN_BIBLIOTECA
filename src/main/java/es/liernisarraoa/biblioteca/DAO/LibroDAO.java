@@ -144,7 +144,7 @@ public class LibroDAO {
         ArrayList<Libro> libros = new ArrayList<Libro>();
         try {
             conexionDB = new ConexionDB();
-            String sql = "SELECT * FROM libro WHERE codigo NOT IN (SELECT codigo_libro FROM prestamo)";
+            String sql = "SELECT * FROM libro WHERE codigo NOT IN (SELECT codigo_libro FROM prestamo) AND baja = 0";
             PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
             ResultSet resultados = pstmt.executeQuery();
             while(resultados.next()){
@@ -162,7 +162,24 @@ public class LibroDAO {
         ArrayList<String> libros = new ArrayList<String>();
         try {
             conexionDB = new ConexionDB();
-            String sql = "SELECT titulo FROM libro WHERE codigo NOT IN (SELECT codigo_libro FROM prestamo)";
+            String sql = "SELECT titulo FROM libro WHERE codigo NOT IN (SELECT codigo_libro FROM prestamo) AND baja = 0";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                libros.add(resultados.getString(1));
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return libros;
+    }
+
+    public static ArrayList<String> listaTitulosEnPrestamo(){
+        ArrayList<String> libros = new ArrayList<String>();
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT titulo FROM libro WHERE codigo IN (SELECT codigo_libro FROM prestamo)";
             PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
             ResultSet resultados = pstmt.executeQuery();
             while(resultados.next()){
@@ -191,5 +208,43 @@ public class LibroDAO {
             throw new RuntimeException(e);
         }
         return codigo_libro;
+    }
+
+    public static String tituloPorCodigo(Integer codigoLibro) {
+        String titulo = "";
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "SELECT titulo FROM libro WHERE codigo = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setInt(1, codigoLibro);
+            ResultSet resultados = pstmt.executeQuery();
+            while(resultados.next()){
+                titulo = resultados.getString(1);
+            }
+            conexionDB.cerrarConexion();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return titulo;
+    }
+
+   public static void actualizarEstadoLibro(String estado, Integer codigo) {
+        int lineas = 0;
+        try {
+            conexionDB = new ConexionDB();
+            String sql = "UPDATE libro SET estado = ? WHERE codigo = ?";
+            PreparedStatement pstmt = conexionDB.getConexion().prepareStatement(sql);
+            pstmt.setString(1, estado);
+            pstmt.setInt(2, codigo);
+            lineas = pstmt.executeUpdate();
+            conexionDB.cerrarConexion();
+        } catch (SQLException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("SQL");
+            alert.setContentText("No se ha podido ejecutar la sentencia.");
+            alert.showAndWait();
+            throw new RuntimeException(ex);
+        }
     }
 }

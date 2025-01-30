@@ -15,8 +15,8 @@ public class HistoricoPrestamo {
     private Integer id_prestamo;
     private String dni_alumno;
     private Integer codigo_libro;
-    private Date fecha_prestamo;
-    private Date fecha_devolucion;
+    private java.sql.Date fecha_prestamo;
+    private java.sql.Date fecha_devolucion;
 
     /**
      * Constructor básico con todos los atributos
@@ -27,7 +27,7 @@ public class HistoricoPrestamo {
      * @param fecha_prestamo
      * @param fecha_devolucion
      */
-    public HistoricoPrestamo(Integer id_prestamo, String dni_alumno, Integer codigo_libro, Date fecha_prestamo, Date fecha_devolucion){
+    public HistoricoPrestamo(Integer id_prestamo, String dni_alumno, Integer codigo_libro, java.sql.Date fecha_prestamo, java.sql.Date fecha_devolucion){
         this.id_prestamo = id_prestamo;
         this.dni_alumno = dni_alumno;
         this.codigo_libro = codigo_libro;
@@ -89,7 +89,7 @@ public class HistoricoPrestamo {
      *
      * @return fecha donde se presta el libro
      */
-    public Date getFecha_prestamo() {
+    public java.sql.Date getFecha_prestamo() {
         return fecha_prestamo;
     }
 
@@ -98,7 +98,7 @@ public class HistoricoPrestamo {
      *
      * @param fecha_prestamo
      */
-    public void setFecha_prestamo(Date fecha_prestamo) {
+    public void setFecha_prestamo(java.sql.Date fecha_prestamo) {
         this.fecha_prestamo = fecha_prestamo;
     }
 
@@ -107,7 +107,7 @@ public class HistoricoPrestamo {
      *
      * @return fecha donde se devuelve el libro
      */
-    public Date getFecha_devolucion() {
+    public java.sql.Date getFecha_devolucion() {
         return fecha_devolucion;
     }
 
@@ -116,7 +116,16 @@ public class HistoricoPrestamo {
      *
      * @param fecha_devolucion
      */
-    public void setFecha_devolucion(Date fecha_devolucion) {
+    public void setFecha_devolucion(java.sql.Date fecha_devolucion) {
         this.fecha_devolucion = fecha_devolucion;
+    }
+
+    @Override
+    public String toString() {
+        return id_prestamo + " -->" +
+                " DNI ALUMNO: " + dni_alumno + " / " +
+                "CODIGO DE LIBRO: " + codigo_libro + " / " +
+                "FECHA PRESTAMO: " + fecha_prestamo + " / " +
+                "FECHA DEVOLUCION" + fecha_devolucion;
     }
 }

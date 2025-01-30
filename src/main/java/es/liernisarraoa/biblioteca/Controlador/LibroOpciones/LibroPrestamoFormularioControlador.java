@@ -86,13 +86,13 @@ public class LibroPrestamoFormularioControlador implements Initializable {
 
                         modalStage.setScene(modalScene);
                         modalStage.initModality(Modality.APPLICATION_MODAL);
-                        modalStage.setTitle("NO SE HA GUARDADO");
+                        modalStage.setTitle("SE HA GUARDADO");
                         modalStage.setResizable(false);
                         //Pasar al controlador el Stage
                         HechoPrestamoControlador controlador = loader.getController();
                         controlador.setStage(modalStage);
                         modalStage.showAndWait();
-
+                        cbCodigoLibro.getItems().setAll(LibroDAO.listaTitulos());
                     } catch (IOException e) {
                         Alert alert = new Alert(Alert.AlertType.ERROR);
                         alert.setHeaderText(null);
