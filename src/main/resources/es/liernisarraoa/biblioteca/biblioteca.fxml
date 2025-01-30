@@ -8,17 +8,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.liernisarraoa.biblioteca.Controlador.BibliotecaControlador" stylesheets="@style.css" styleClass="border_pane">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="border_pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="es.liernisarraoa.biblioteca.Controlador.BibliotecaControlador">
    <center>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fx:id="alumnos" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#abrirAlumnos" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="alumnos" fitHeight="191.0" fitWidth="209.0" onMouseClicked="#abrirAlumnos" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Imagenes/alumnos.png" />
                </image>
                <HBox.margin>
-                  <Insets left="50.0" top="70.0" />
+                  <Insets left="25.0" top="70.0" />
                </HBox.margin>
             </ImageView>
             <ImageView fx:id="libros" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#abrirLibros" pickOnBounds="true" preserveRatio="true">
@@ -26,7 +25,15 @@
                   <Image url="@Imagenes/libros.png" />
                </image>
                <HBox.margin>
-                  <Insets left="100.0" top="70.0" />
+                  <Insets left="10.0" top="70.0" />
+               </HBox.margin>
+            </ImageView>
+            <ImageView fx:id="iwInformes" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#abrirInformes" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Imagenes/informes.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" top="70.0" />
                </HBox.margin>
             </ImageView>
          </children>

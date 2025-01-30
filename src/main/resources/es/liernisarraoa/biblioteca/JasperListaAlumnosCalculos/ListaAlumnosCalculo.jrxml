@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ListaAlumnosCalculo" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="b68de0ed-8e68-41a9-ba6d-dceaefc81c54">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MariaDB"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  
+    a.dni, 
+    a.nombre,
+    a.apellido1,
+    a.apellido2,
+    COUNT(hp.id_prestamo) AS total_prestamos_devueltos,
+    (SELECT COUNT(prestamo.id_prestamo)
+		FROM libros.prestamo
+		WHERE prestamo.dni_alumno = a.dni) AS total_prestamos_no_devueltos
+FROM libros.alumno a
+JOIN libros.historico_prestamo hp ON a.dni = hp.dni_alumno
+GROUP BY a.dni, a.nombre]]>
+	</queryString>
+	<field name="dni" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="dni"/>
+		<property name="com.jaspersoft.studio.field.name" value="dni"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+	</field>
+	<field name="apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.name" value="apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+	</field>
+	<field name="apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.name" value="apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+	</field>
+	<field name="total_prestamos_devueltos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="total_prestamos_devueltos"/>
+		<property name="com.jaspersoft.studio.field.name" value="total_prestamos_devueltos"/>
+	</field>
+	<field name="total_prestamos_no_devueltos" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="total_prestamos_no_devueltos"/>
+		<property name="com.jaspersoft.studio.field.name" value="total_prestamos_no_devueltos"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="d55ad544-ee90-4b09-8561-f19bd28d97cf"/>
+				<staticText>
+					<reportElement x="20" y="20" width="340" height="43" forecolor="#FFFFFF" uuid="41537de4-8f94-4ffa-b9a4-c979b7107cd9"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[LISTA DE ALUMNOS]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="360" y="43" width="215" height="20" forecolor="#FFFFFF" uuid="e19e5c97-11fb-46c3-9cf0-dca4a4f60168"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[CON CALCULOS INCLUIDOS]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="53bacc6c-e45e-494b-a3e0-6f86c4bdbfd5"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="163">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="30" uuid="885cabab-70d1-4e12-89e0-fff3e3c786cc"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dni} + " --> " + $F{nombre} + " " + $F{apellido1} + " " + $F{apellido2}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="40" width="275" height="30" uuid="6585de3c-b9b7-4ad3-8b72-0333253cb713"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO DE LIBROS DEVUELTOS -->]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="40" width="170" height="30" uuid="f155255e-d344-41bf-9552-625d1080d09d"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_prestamos_devueltos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="35" y="100" width="275" height="30" uuid="bf98f03a-1c55-4a6d-93f5-aef833692419"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14" isBold="false" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO DE LIBROS NO DEVUELTOS -->]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="320" y="100" width="170" height="30" uuid="5fec1a7a-b4fd-4866-8587-8e58fa7af34c"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total_prestamos_no_devueltos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="e2db7ce8-c7ea-428f-ba56-a2ddad020dd8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="2fe39fbb-ef23-43d8-a93b-7f468093c563"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="751b8180-9b95-4f6f-b9f8-325022dd69d6"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

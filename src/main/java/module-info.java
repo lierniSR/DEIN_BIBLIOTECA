@@ -4,6 +4,7 @@ module es.liernisarraoa.biblioteca {
     requires java.sql;
     requires java.desktop;
     requires org.checkerframework.checker.qual;
+    requires jasperreports;
 
 
     opens es.liernisarraoa.biblioteca to javafx.fxml;
@@ -20,4 +21,6 @@ module es.liernisarraoa.biblioteca {
     opens es.liernisarraoa.biblioteca.Controlador.LibroOpciones to javafx.fxml;
     exports es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos;
     opens es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos to javafx.fxml;
+    exports es.liernisarraoa.biblioteca.Controlador.Informe;
+    opens es.liernisarraoa.biblioteca.Controlador.Informe to javafx.fxml;
 }

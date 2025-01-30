@@ -1,6 +1,7 @@
 package es.liernisarraoa.biblioteca.Controlador;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
+import es.liernisarraoa.biblioteca.Controlador.Informe.InformeControlador;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,8 +20,9 @@ import java.util.ResourceBundle;
 
 public class BibliotecaControlador implements Initializable {
     @FXML
+    public ImageView iwInformes;
+    @FXML
     private ImageView libros;
-
     @FXML
     private ImageView alumnos;
 
@@ -84,5 +86,28 @@ public class BibliotecaControlador implements Initializable {
         // Asignar el Tooltip al botón
         Tooltip.install(alumnos, tooltipAlumno);
         Tooltip.install(libros, tooltipLibro);
+    }
+
+    public void abrirInformes(MouseEvent mouseEvent) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Informes/informe.fxml"));
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load(), 600, 400);
+            stage.setTitle("INFORMES");
+            stage.setResizable(false);
+            stage.setScene(scene);
+            stage.show();
+
+            //Pasar al controlador el Stage
+            InformeControlador controlador = fxmlLoader.getController();
+            controlador.setStage(stage);
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("FXML");
+            alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
+            alert.showAndWait();
+            e.printStackTrace();
+        }
     }
 }

@@ -129,7 +129,6 @@ public class LibroControlador implements Initializable {
             alert.setTitle("FXML");
             alert.setContentText("El archivo que contiene la visualizacion de la pestaña no se ha podido cargar.");
             alert.showAndWait();
-            e.printStackTrace();
         }
     }
 

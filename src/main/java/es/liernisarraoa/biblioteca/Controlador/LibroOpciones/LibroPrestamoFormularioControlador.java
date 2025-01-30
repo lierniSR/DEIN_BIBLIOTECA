@@ -10,6 +10,7 @@ import es.liernisarraoa.biblioteca.DAO.LibroDAO;
 import es.liernisarraoa.biblioteca.DAO.PrestamoDAO;
 import es.liernisarraoa.biblioteca.Modelo.Libro;
 import es.liernisarraoa.biblioteca.Modelo.Prestamo;
+import es.liernisarraoa.biblioteca.Propiedades.Propiedades;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,10 +22,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.time.LocalDate;
+import java.util.*;
 
 public class LibroPrestamoFormularioControlador implements Initializable {
     @FXML
@@ -45,6 +52,7 @@ public class LibroPrestamoFormularioControlador implements Initializable {
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
+    private final Propiedades propiedades = new Propiedades();
 
     public void volverPrestamo(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/prestamoLibro.fxml"));
@@ -92,6 +100,8 @@ public class LibroPrestamoFormularioControlador implements Initializable {
                         HechoPrestamoControlador controlador = loader.getController();
                         controlador.setStage(modalStage);
                         modalStage.showAndWait();
+                        generarImforme(Integer.parseInt(tfIdPrestamo.getText()));
+                        //System.out.println(tfIdPrestamo.getText());
                         cbCodigoLibro.getSelectionModel().clearSelection();
                         cbCodigoLibro.getItems().setAll(LibroDAO.listaTitulos());
                         cbAlumno.getSelectionModel().clearSelection();
@@ -115,6 +125,40 @@ public class LibroPrestamoFormularioControlador implements Initializable {
             alert.setContentText("No se ha podido prestar el libro.\n" +
                     "Todos los campos tienen que estar llenos.");
             alert.showAndWait();
+        }
+    }
+
+    private void generarImforme(int idPrestamo) {
+        System.out.println(idPrestamo);
+        LocalDate fechaActual = LocalDate.now();
+        try {
+            // Ruta del archivo Jasper (compilado)
+            String reportPath = "C:\\DM2\\DEIN\\ProyectoFXJasper\\Biblioteca\\src\\main\\resources\\es\\liernisarraoa\\biblioteca\\JasperPrestamoAlta\\PrestamoAlta.jasper";
+
+            // Cargar el archivo Jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
+
+            // Configurar conexión a la base de datos
+            String dbUrl = "jdbc:mariadb://localhost:3306/libros";
+            String dbUser  = propiedades.getProperty("db.usuario");
+            String dbPassword = propiedades.getProperty("db.contrasenia");
+
+            Connection connection = DriverManager.getConnection(dbUrl, dbUser , dbPassword);
+
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("codigo_prestamo", idPrestamo);
+            // Llenar el informe con datos
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parametros, connection);
+
+            // Mostrar el informe
+            JasperViewer.viewReport(jasperPrint, false);
+
+            // Exportar a PDF (opcional)
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "PDF/AltasPrestamo/reporteAltaPrestamo_" + fechaActual + ".pdf");
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
