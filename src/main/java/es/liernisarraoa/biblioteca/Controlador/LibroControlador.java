@@ -21,7 +21,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para el layout libros.fxml
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroControlador implements Initializable {
+    /**
+     * Atributos del layout libros.fxml
+     */
     @FXML
     public Button volverPrincipal;
     @FXML
@@ -37,12 +46,25 @@ public class LibroControlador implements Initializable {
     @FXML
     private ImageView btnHistorico;
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     */
     private Stage stage;
 
+    /**
+     * Para pasar el parametro stage de controlador a controlador
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Para volver a la pagina inicial con el layout biblioteca.fxml con el controlador BibliotecaControlador
+     *
+     * @param actionEvent
+     */
     public void volverPrincipal(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -65,6 +87,13 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen de mas.
+     * Para ir al formulario para añadir un Libro.
+     * Layout aniadirLibro.fxml y el controlador LibroAniadirControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirAniadirLibro(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/aniadirLibro.fxml"));
         Scene scene = null;
@@ -87,6 +116,13 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen del lapiz.
+     * Para ir al formulario de modificar Libro.
+     * Layout modificarLibro.fxml con el controlador LibroModificarControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirModificarLibro(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/modificarLibro.fxml"));
         Scene scene = null;
@@ -110,12 +146,19 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen de la basura.
+     * Para ir a la lista para eliminar Libro.
+     * Layout eliminarLibro.fxml con el controlador LibroEliminarControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirEliminarLibro(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/eliminarLibro.fxml"));
         Scene scene = null;
         try {
             scene = new Scene(fxmlLoader.load(), 600, 400);
-            stage.setTitle("Baja/Altas de libros");
+            stage.setTitle("Eliminar libros");
             stage.setResizable(false);
             stage.setScene(scene);
             stage.show();
@@ -132,6 +175,13 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen del libro.
+     * Para ir a la lista de libros para prestar un Libro.
+     * Layout prestamoLibro.fxml con el controlador LibroPrestamoControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirPrestamo(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/prestamoLibro.fxml"));
         Scene scene = null;
@@ -154,6 +204,13 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen de la persona devolviendo un libro.
+     * Para ir a la lista de préstamos para devolver un Libro.
+     * Layout devolverLibro.fxml con el controlador LibroDevolverControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirDevolucion(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/devolverLibro.fxml"));
         Scene scene = null;
@@ -176,6 +233,13 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen del archivo con un reloj.
+     * Para ir a la lista del historico de préstamos de todos los libros.
+     * Layout historicoPrestamos.fxml con el controlador LibroHistoricoPrestamoControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirHistorico(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/historicoPrestamos.fxml"));
         Scene scene = null;
@@ -198,6 +262,13 @@ public class LibroControlador implements Initializable {
         }
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

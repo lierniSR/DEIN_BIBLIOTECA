@@ -44,8 +44,4 @@ public class ConexionDB {
         }
         return conexion;
     }
-
-    public static void main(String[] args) throws SQLException {
-        ConexionDB conexionDB = new ConexionDB();
-    }
 }
