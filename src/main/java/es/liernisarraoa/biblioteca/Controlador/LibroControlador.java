@@ -1,7 +1,6 @@
 package es.liernisarraoa.biblioteca.Controlador;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
-import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.AlumnoEliminarControlador;
 import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,11 +11,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

@@ -2,7 +2,6 @@ package es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoControlador;
-import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos.ErrorControlador;
 import es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos.HechoControlador;
 import es.liernisarraoa.biblioteca.Controlador.BibliotecaControlador;
 import es.liernisarraoa.biblioteca.DAO.AlumnoDAO;
@@ -26,7 +25,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para el layout aniadirAlumno.fxml
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class AlumnoAniadirControlador implements Initializable {
+    /**
+     * Atributos del layout biblioteca.fxml
+     */
     @FXML
     public TextField tfDNI;
     @FXML
@@ -42,11 +50,20 @@ public class AlumnoAniadirControlador implements Initializable {
     @FXML
     public Button volverAlumno;
 
+    /**
+     * Atributos que necesitamos de la clase, para abrir ventanas normales y modales
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
-    private String opcion = "Añadir";
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -69,6 +86,16 @@ public class AlumnoAniadirControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de añadir.
+     * Cuando se clica comprueba que todos los campos no esten vacios,
+     * después hace una consulta a la base de datos desde la clase AlumnoDAO,
+     * si la consulta sale true abrira una ventana modal con el layout dialogoBien.fxml
+     * y el controlador HechoControlador.
+     * Si da algún error saldrá una alerta de error.
+     *
+     * @param actionEvent
+     */
     public void aniadirAlumno(ActionEvent actionEvent) {
         if(!tfDNI.getText().isEmpty() && !tfNombre.getText().isEmpty() && !tfApellido1.getText().isEmpty() && !tfApellido2.getText().isEmpty() && tfDNI.getText().length() == 9){
             Alumno alumno = new Alumno(tfDNI.getText(), tfNombre.getText(), tfApellido1.getText(), tfApellido2.getText());
@@ -115,6 +142,13 @@ public class AlumnoAniadirControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Alumnos.
+     * Layout alumnos.fxml y el controlador AlumnoControlador.
+     *
+     * @param actionEvent
+     */
     public void volverAlumnos(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Alumno/alumnos.fxml"));
         Scene scene = null;
@@ -137,10 +171,22 @@ public class AlumnoAniadirControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

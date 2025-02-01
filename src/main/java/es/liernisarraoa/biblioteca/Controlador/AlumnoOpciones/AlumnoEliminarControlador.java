@@ -26,7 +26,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para el layout eliminarAlumno.fxml
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class AlumnoEliminarControlador implements Initializable {
+    /**
+     * Atributos del layout biblioteca.fxml
+     */
     @FXML
     public ListView<Alumno> seleccionAlumno;
     @FXML
@@ -36,10 +45,20 @@ public class AlumnoEliminarControlador implements Initializable {
     @FXML
     public Button btnVolver;
 
+    /**
+     * Atributos que necesitamos de la clase, para abrir ventanas normales y modales
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Alumnos.
+     * Layout alumnos.fxml y el controlador AlumnoControlador.
+     *
+     * @param actionEvent
+     */
     public void volverAlumno(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Alumno/alumnos.fxml"));
         Scene scene = null;
@@ -62,6 +81,16 @@ public class AlumnoEliminarControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de eliminar.
+     * Cuando se clica comprueba que se ha seleccionado un registro de la lista,
+     * después hace una consulta a la base de datos desde la clase AlumnoDAO,
+     * si la consulta sale true abrira una ventana modal con el layout dialogoBienEliminar.fxml
+     * y el controlador HechoEliminarControlador.
+     * Si da algún error saldrá una alerta de error.
+     *
+     * @param actionEvent
+     */
     public void eliminarAlumno(ActionEvent actionEvent) {
         Alumno alumno = seleccionAlumno.getSelectionModel().getSelectedItem();
         if(alumno != null){
@@ -105,6 +134,13 @@ public class AlumnoEliminarControlador implements Initializable {
 
     }
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -127,10 +163,22 @@ public class AlumnoEliminarControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
