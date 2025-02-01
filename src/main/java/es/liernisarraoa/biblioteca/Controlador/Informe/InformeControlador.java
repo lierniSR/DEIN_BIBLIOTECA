@@ -24,7 +24,16 @@ import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+/**
+ * Controlador para abrir los informes
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class InformeControlador {
+    /**
+     * Atributos del layout biblioteca.fxml
+     */
     @FXML
     public Button btnLibro;
     @FXML
@@ -36,9 +45,18 @@ public class InformeControlador {
     @FXML
     public Button btnVolver;
 
+    /**
+     * Atributos que necesitamos de la clase, para abrir ventanas normales y modales
+     */
     private Stage stage;
     private final Propiedades propiedades = new Propiedades();
 
+    /**
+     * Este ActionEvent perteneces al boton de listado de libros
+     * Es para abrir el informe creado en JasperReport
+     *
+     * @param actionEvent
+     */
     public void abrirInformeLibros(ActionEvent actionEvent) {
         LocalDate fechaActual = LocalDate.now();
         try {
@@ -73,6 +91,12 @@ public class InformeControlador {
     public void abrirInformeDeGraficos(ActionEvent actionEvent) {
     }
 
+    /**
+     * Este ActionEvent perteneces al boton de listado de alumnos
+     * Es para abrir el informe creado en JasperReport
+     *
+     * @param actionEvent
+     */
     public void abrirInformeAlumnos(ActionEvent actionEvent) {
         LocalDate fechaActual = LocalDate.now();
         try {
@@ -112,7 +136,13 @@ public class InformeControlador {
         }
     }
 
-
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(ActionEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -135,6 +165,11 @@ public class InformeControlador {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
