@@ -18,7 +18,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para el layout biblioteca.fxml
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class BibliotecaControlador implements Initializable {
+    /**
+     * Atributos del layout biblioteca.fxml
+     */
     @FXML
     public ImageView iwInformes;
     @FXML
@@ -26,8 +35,18 @@ public class BibliotecaControlador implements Initializable {
     @FXML
     private ImageView alumnos;
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     */
     private Stage stage;
 
+    /**
+     * Este ActionEvent es para la imagen de los alumnos.
+     * Para ir a la página de gestión de Alumnos.
+     * Layout alumnos.fxml y el controlador AlumnoControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirAlumnos(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Alumno/alumnos.fxml"));
         Scene scene = null;
@@ -50,6 +69,13 @@ public class BibliotecaControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para la imagen de los libros.
+     * Para ir a la página de gestión de los Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirLibros(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -73,10 +99,22 @@ public class BibliotecaControlador implements Initializable {
         }
     }
 
+    /**
+     * Para pasar el parametro stage de controlador a controlador
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
@@ -88,6 +126,13 @@ public class BibliotecaControlador implements Initializable {
         Tooltip.install(libros, tooltipLibro);
     }
 
+    /**
+     * Este ActionEvent es para la imagen de informes.
+     * Para ir a la página de informes.
+     * Layout informe.fxml y el controlador InformeControlador.
+     *
+     * @param mouseEvent
+     */
     public void abrirInformes(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Informes/informe.fxml"));
         Scene scene = null;
