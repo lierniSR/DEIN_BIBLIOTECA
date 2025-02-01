@@ -41,7 +41,7 @@ public class BibliotecaControlador implements Initializable {
     private Stage stage;
 
     /**
-     * Este ActionEvent es para la imagen de los alumnos.
+     * Este MouseEvent es para la imagen de los alumnos.
      * Para ir a la página de gestión de Alumnos.
      * Layout alumnos.fxml y el controlador AlumnoControlador.
      *
@@ -70,7 +70,7 @@ public class BibliotecaControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen de los libros.
+     * Este MouseEvent es para la imagen de los libros.
      * Para ir a la página de gestión de los Libros.
      * Layout libros.fxml y el controlador LibroControlador.
      *
@@ -127,7 +127,7 @@ public class BibliotecaControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen de informes.
+     * Este MouseEvent es para la imagen de informes.
      * Para ir a la página de informes.
      * Layout informe.fxml y el controlador InformeControlador.
      *

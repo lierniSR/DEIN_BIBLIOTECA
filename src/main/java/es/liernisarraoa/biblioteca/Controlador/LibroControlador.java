@@ -88,7 +88,7 @@ public class LibroControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen de mas.
+     * Este MouseEvent es para la imagen de mas.
      * Para ir al formulario para añadir un Libro.
      * Layout aniadirLibro.fxml y el controlador LibroAniadirControlador.
      *
@@ -117,7 +117,7 @@ public class LibroControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen del lapiz.
+     * Este MouseEvent es para la imagen del lapiz.
      * Para ir al formulario de modificar Libro.
      * Layout modificarLibro.fxml con el controlador LibroModificarControlador.
      *
@@ -147,7 +147,7 @@ public class LibroControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen de la basura.
+     * Este MouseEvent es para la imagen de la basura.
      * Para ir a la lista para eliminar Libro.
      * Layout eliminarLibro.fxml con el controlador LibroEliminarControlador.
      *
@@ -176,7 +176,7 @@ public class LibroControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen del libro.
+     * Este MouseEvent es para la imagen del libro.
      * Para ir a la lista de libros para prestar un Libro.
      * Layout prestamoLibro.fxml con el controlador LibroPrestamoControlador.
      *
@@ -205,7 +205,7 @@ public class LibroControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen de la persona devolviendo un libro.
+     * Este MouseEvent es para la imagen de la persona devolviendo un libro.
      * Para ir a la lista de préstamos para devolver un Libro.
      * Layout devolverLibro.fxml con el controlador LibroDevolverControlador.
      *
@@ -234,7 +234,7 @@ public class LibroControlador implements Initializable {
     }
 
     /**
-     * Este ActionEvent es para la imagen del archivo con un reloj.
+     * Este MouseEvent es para la imagen del archivo con un reloj.
      * Para ir a la lista del historico de préstamos de todos los libros.
      * Layout historicoPrestamos.fxml con el controlador LibroHistoricoPrestamoControlador.
      *
