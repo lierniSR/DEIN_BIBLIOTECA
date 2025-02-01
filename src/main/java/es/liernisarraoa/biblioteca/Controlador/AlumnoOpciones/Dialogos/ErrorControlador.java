@@ -18,7 +18,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controlador para el layout dialogoError.fxml
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class ErrorControlador implements Initializable {
+    /**
+     * Atributos del layout biblioteca.fxml
+     */
     @FXML
     public Button btnLista;
     @FXML
@@ -26,8 +35,17 @@ public class ErrorControlador implements Initializable {
     @FXML
     public Label lblTexto;
 
+    /**
+     * Atributos que necesitamos de la clase, para abrir ventanas normales y modales
+     */
     private Stage stage;
 
+    /**
+     * Para abrir la lista de alumnos.
+     * Layout listaAlumnos.fxml y el controlador ListaAlumnos
+     *
+     * @param actionEvent
+     */
     public void abrirListaAlumnos(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Alumno/listaAlumnos.fxml"));
         Scene scene = null;
@@ -50,10 +68,22 @@ public class ErrorControlador implements Initializable {
         }
     }
 
+    /**
+     * Para salir de la ventana modal.
+     *
+     * @param actionEvent
+     */
     public void salir(ActionEvent actionEvent) {
         ((Stage)lblTexto.getScene().getWindow()).close();
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblTexto.setText("El alumno que has insertado no se\n" +
@@ -69,6 +99,11 @@ public class ErrorControlador implements Initializable {
         Tooltip.install(btnOK, tooltipVolverAniadirAlumno);
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
