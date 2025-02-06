@@ -31,7 +31,7 @@ import java.util.ResourceBundle;
  */
 public class AlumnoModificarControlador implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout modificarAlumno.fxml
      */
     @FXML
     public ChoiceBox<Alumno> seleccionAlumnos;

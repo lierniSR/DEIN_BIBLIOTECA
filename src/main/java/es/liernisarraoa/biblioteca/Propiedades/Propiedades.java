@@ -4,9 +4,21 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Para las propiedades del proyecto
+ *
+ * @author Lierni Sarraoa Joaquin
+ * @version 1.0
+ */
 public class Propiedades {
+    /**
+     * Atributos que necesitamos
+     */
     private Properties properties;
 
+    /**
+     * Constructor
+     */
     public Propiedades() {
         properties = new Properties();
         try (InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties")) {
@@ -21,6 +33,12 @@ public class Propiedades {
         }
     }
 
+    /**
+     * Para encontrar el valor
+     *
+     * @param key
+     * @return valor
+     */
     public String getProperty(String key) {
         return properties.getProperty(key);
     }

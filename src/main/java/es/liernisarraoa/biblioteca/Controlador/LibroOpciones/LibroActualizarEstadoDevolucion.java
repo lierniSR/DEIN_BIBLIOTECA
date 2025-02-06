@@ -3,7 +3,6 @@ package es.liernisarraoa.biblioteca.Controlador.LibroOpciones;
 import es.liernisarraoa.biblioteca.Biblioteca;
 import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos.HechoDevolverControlador;
 import es.liernisarraoa.biblioteca.DAO.LibroDAO;
-import es.liernisarraoa.biblioteca.DAO.PrestamoDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,7 +17,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Modal para cuando devuelves un libro actualizar el estado.
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroActualizarEstadoDevolucion implements Initializable {
+    /**
+     * Atributos del archivo dialogoEstadoDevolucion.fxml
+     */
     @FXML
     public Label lblEstado;
     @FXML
@@ -28,11 +36,20 @@ public class LibroActualizarEstadoDevolucion implements Initializable {
     @FXML
     public Button btnVolver;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
     private String titulo;
 
+    /**
+     * Verifica si el ChoiceBox esta vacío si está vació sale de la modal, si ha seleccionado algo
+     * hace una consulta con la clase LibroDao
+     *
+     * @param actionEvent
+     */
     public void guardarEstadoLibro(ActionEvent actionEvent) {
         if(!cbEstadoLibro.getSelectionModel().isEmpty()){
             Integer codigo_libro = LibroDAO.conseguirCodigoConTitulo(titulo);
@@ -62,9 +79,18 @@ public class LibroActualizarEstadoDevolucion implements Initializable {
                 alert.showAndWait();
                 throw new RuntimeException(e);
             }
+        } else {
+            ((Stage)lblEstado.getScene().getWindow()).close();
         }
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         cbEstadoLibro.getItems().addAll(
@@ -92,14 +118,29 @@ public class LibroActualizarEstadoDevolucion implements Initializable {
         Tooltip.install(btnVolver, tooltipVolver);
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Este atributo es para poder hacer la consulta
+     *
+     * @param titulo
+     */
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
 
+    /**
+     * Para cerrar la ventana.
+     *
+     * @param actionEvent
+     */
     public void volverPrestamo(ActionEvent actionEvent) {
         ((Stage)lblEstado.getScene().getWindow()).close();
     }

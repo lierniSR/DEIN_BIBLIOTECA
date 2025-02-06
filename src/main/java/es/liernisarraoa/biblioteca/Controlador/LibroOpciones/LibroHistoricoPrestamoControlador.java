@@ -20,7 +20,16 @@ import java.net.URL;
 import java.sql.Date;
 import java.util.ResourceBundle;
 
+/**
+ * Lista del historico de prestamos
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroHistoricoPrestamoControlador implements Initializable {
+    /**
+     * Atributos del archivo historicoPrestamos.fxml
+     */
     @FXML
     public TextField tfDNI;
     @FXML
@@ -38,8 +47,18 @@ public class LibroHistoricoPrestamoControlador implements Initializable {
     @FXML
     public DatePicker dpFechaDevolucion;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param actionEvent
+     */
     public void volverLibros(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -62,6 +81,13 @@ public class LibroHistoricoPrestamoControlador implements Initializable {
         }
     }
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -84,6 +110,11 @@ public class LibroHistoricoPrestamoControlador implements Initializable {
         }
     }
 
+    /**
+     * Este MouseEvent es para poder filtrar la lista.
+     *
+     * @param mouseEvent
+     */
     public void filtrar(MouseEvent mouseEvent) {
         int filtrado = 0;
         if(!tfCodigoLibro.getText().isEmpty()){
@@ -129,10 +160,22 @@ public class LibroHistoricoPrestamoControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

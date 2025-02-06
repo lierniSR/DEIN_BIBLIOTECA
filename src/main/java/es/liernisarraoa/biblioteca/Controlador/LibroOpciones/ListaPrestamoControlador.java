@@ -14,6 +14,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * Para la lista de prestamos con layout
+ */
 public class ListaPrestamoControlador implements Initializable {
     @FXML
     public Button btnVolver;

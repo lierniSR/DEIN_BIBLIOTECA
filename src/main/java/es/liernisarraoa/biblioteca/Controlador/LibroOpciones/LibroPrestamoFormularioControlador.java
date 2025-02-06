@@ -33,7 +33,16 @@ import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Formulario para poder coger prestado un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroPrestamoFormularioControlador implements Initializable {
+    /**
+     * Atributos del archivo aniadirLibro.fxml
+     */
     @FXML
     public TextField tfIdPrestamo;
     @FXML
@@ -49,11 +58,19 @@ public class LibroPrestamoFormularioControlador implements Initializable {
     @FXML
     public ChoiceBox<String> cbCodigoLibro;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
     private final Propiedades propiedades = new Propiedades();
 
+    /**
+     * Para volver a la lista de libros para poder coger prestado otro libro
+     *
+     * @param actionEvent
+     */
     public void volverPrestamo(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/prestamoLibro.fxml"));
         Scene scene = null;
@@ -76,6 +93,11 @@ public class LibroPrestamoFormularioControlador implements Initializable {
         }
     }
 
+    /**
+     * Se conecta a la base de datos para poder coer prestado el libro
+     *
+     * @param actionEvent
+     */
     public void prestarLibro(ActionEvent actionEvent) {
         if(!tfIdPrestamo.getText().isEmpty() && cbCodigoLibro.getSelectionModel().getSelectedItem() != null && cbAlumno.getSelectionModel().getSelectedItem() != null && dpFechaPrestamo.getValue() != null){
             try{
@@ -128,6 +150,11 @@ public class LibroPrestamoFormularioControlador implements Initializable {
         }
     }
 
+    /**
+     * Cada vez que se coge un libro prestado se genera un informe
+     *
+     * @param idPrestamo
+     */
     private void generarImforme(int idPrestamo) {
         System.out.println(idPrestamo);
         LocalDate fechaActual = LocalDate.now();
@@ -162,6 +189,13 @@ public class LibroPrestamoFormularioControlador implements Initializable {
         }
     }
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -184,11 +218,22 @@ public class LibroPrestamoFormularioControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

@@ -1,7 +1,6 @@
 package es.liernisarraoa.biblioteca.Controlador.LibroOpciones;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
-import es.liernisarraoa.biblioteca.Controlador.AlumnoControlador;
 import es.liernisarraoa.biblioteca.Controlador.BibliotecaControlador;
 import es.liernisarraoa.biblioteca.Controlador.LibroControlador;
 import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos.HechoControlador;
@@ -23,7 +22,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Formulario para poder añadir un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroAniadirControlador implements Initializable {
+    /**
+     * Atributos del archivo aniadirLibro.fxml
+     */
     @FXML
     public TextField tfCodigo;
     @FXML
@@ -43,14 +51,29 @@ public class LibroAniadirControlador implements Initializable {
     @FXML
     public Button btnVolver;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param actionEvent
+     */
     public void volverLibro(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -73,6 +96,16 @@ public class LibroAniadirControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de añadir.
+     * Cuando se clica comprueba que todos los campos no esten vacios,
+     * después hace una consulta a la base de datos desde la clase LibroDAO,
+     * si la consulta sale true abrira una ventana modal con el layout dialogoBien.fxml
+     * y el controlador HechoControlador.
+     * Si da algún error saldrá una alerta de error.
+     *
+     * @param actionEvent
+     */
     public void aniadirLibro(ActionEvent actionEvent) {
         if(!tfTitulo.getText().isEmpty() && !tfAutor.getText().isEmpty() && !tfEditorial.getText().isEmpty() && !seleccionEstado.getSelectionModel().getSelectedItem().isEmpty()){
             try{
@@ -133,6 +166,13 @@ public class LibroAniadirControlador implements Initializable {
         }
     }
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -155,6 +195,13 @@ public class LibroAniadirControlador implements Initializable {
         }
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

@@ -1,13 +1,10 @@
 package es.liernisarraoa.biblioteca.Controlador.LibroOpciones;
 
 import es.liernisarraoa.biblioteca.Biblioteca;
-import es.liernisarraoa.biblioteca.Controlador.AlumnoControlador;
 import es.liernisarraoa.biblioteca.Controlador.BibliotecaControlador;
 import es.liernisarraoa.biblioteca.Controlador.LibroControlador;
 import es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos.HechoEliminarControlador;
-import es.liernisarraoa.biblioteca.DAO.AlumnoDAO;
 import es.liernisarraoa.biblioteca.DAO.LibroDAO;
-import es.liernisarraoa.biblioteca.Modelo.Alumno;
 import es.liernisarraoa.biblioteca.Modelo.Libro;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -28,7 +25,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Formulario para poder eliminar un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroEliminarControlador implements Initializable {
+    /**
+     * Atributos del archivo eliminarLibro.fxml
+     */
     @FXML
     public ListView<Libro> seleccionLibro;
     @FXML
@@ -38,10 +44,20 @@ public class LibroEliminarControlador implements Initializable {
     @FXML
     public Button btnVolver;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param actionEvent
+     */
     public void volverLibro(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -64,6 +80,16 @@ public class LibroEliminarControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de eliminar.
+     * Cuando se clica comprueba si ha seleccionado algún registro,
+     * después hace una consulta a la base de datos desde la clase LibroDAO,
+     * si la consulta sale true abrira una ventana modal con el layout dialogoBienEliminar.fxml
+     * y el controlador HechoEliminarControlador.
+     * Si da algún error saldrá una alerta de error.
+     *
+     * @param actionEvent
+     */
     public void eliminarLibro(ActionEvent actionEvent) {
         Libro libro = seleccionLibro.getSelectionModel().getSelectedItem();
         if(libro != null){
@@ -108,6 +134,13 @@ public class LibroEliminarControlador implements Initializable {
 
     }
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -130,10 +163,22 @@ public class LibroEliminarControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

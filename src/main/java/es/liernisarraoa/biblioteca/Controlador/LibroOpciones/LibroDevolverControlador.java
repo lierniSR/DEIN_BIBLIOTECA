@@ -31,7 +31,16 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
+/**
+ * Formulario para poder devolver un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroDevolverControlador implements Initializable {
+    /**
+     * Atributos del archivo aniadirLibro.fxml
+     */
     @FXML
     public ImageView iwHome;
     @FXML
@@ -41,10 +50,20 @@ public class LibroDevolverControlador implements Initializable {
     @FXML
     public ListView<Prestamo> lvPrestamos;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -67,6 +86,12 @@ public class LibroDevolverControlador implements Initializable {
         }
     }
 
+    /**
+     * Al clical en el boton de devolver se hacen varias consultas a la base de tos
+     * con las clases LibroDao, HistoricoDAO y PrestamoDAO.
+     *
+     * @param actionEvent
+     */
     public void devolverLibro(ActionEvent actionEvent) {
         Prestamo prestamo = lvPrestamos.getSelectionModel().getSelectedItem();
         String tituloLibro = LibroDAO.tituloPorCodigo(prestamo.getCodigo_libro());
@@ -112,6 +137,13 @@ public class LibroDevolverControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param actionEvent
+     */
     public void volverLibro(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -134,6 +166,13 @@ public class LibroDevolverControlador implements Initializable {
         }
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
@@ -151,6 +190,11 @@ public class LibroDevolverControlador implements Initializable {
         lvPrestamos.getItems().addAll(PrestamoDAO.listaDePrestamos());
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

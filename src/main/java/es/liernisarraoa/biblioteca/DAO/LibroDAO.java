@@ -19,11 +19,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Consultas SQL para la tabla Libro
+ *
+ * @author Lierni Sarraoa Joaquin
+ * @version 1.0
+ */
 public class LibroDAO {
+    /**
+     * Atributos para la clase
+     */
     private static Stage modalStage;
     private static Scene modalScene;
     private static ConexionDB conexionDB;
 
+    /**
+     * Consulta para insertar un libro en la base de datos
+     *
+     * @param libro
+     * @return si ha ido bien o no
+     */
     public static boolean aniadirLibro(Libro libro) {
         int lineas = 0;
         try {
@@ -74,6 +89,11 @@ public class LibroDAO {
         return lineas > 0;
     }
 
+    /**
+     * Para listar todos los libros de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<Libro> listaDeLibros() {
         ArrayList<Libro> libros = new ArrayList<Libro>();
         try {
@@ -92,6 +112,11 @@ public class LibroDAO {
         return libros;
     }
 
+    /**
+     * Consulta para actualizar un libro en la base de datos
+     *
+     * @param libro
+     */
     public static boolean actualizarLibro(Libro libro) {
         int lineas = 0;
         try {
@@ -117,6 +142,11 @@ public class LibroDAO {
         return lineas > 0;
     }
 
+    /**
+     * Consulta para eliminar un libro en la base de datos
+     *
+     * @param libro
+     */
     public static boolean eliminarLibro(Libro libro) {
         int lineas = 0;
         try {
@@ -140,6 +170,11 @@ public class LibroDAO {
         return lineas > 0;
     }
 
+    /**
+     * Para listar librosno prestados de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<Libro> listarLibrosNoPrestados(){
         ArrayList<Libro> libros = new ArrayList<Libro>();
         try {
@@ -158,6 +193,11 @@ public class LibroDAO {
         return libros;
     }
 
+    /**
+     * Para listar los titulos de todos los libros de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<String> listaTitulos(){
         ArrayList<String> libros = new ArrayList<String>();
         try {
@@ -175,6 +215,11 @@ public class LibroDAO {
         return libros;
     }
 
+    /**
+     * Para listar los titulos de los libros en prestamo.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<String> listaTitulosEnPrestamo(){
         ArrayList<String> libros = new ArrayList<String>();
         try {
@@ -192,6 +237,11 @@ public class LibroDAO {
         return libros;
     }
 
+    /**
+     * Para conseguir el codigo en base a un codigo en la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static Integer conseguirCodigoConTitulo(String titulo) {
         int codigo_libro = 0;
         try {
@@ -209,7 +259,11 @@ public class LibroDAO {
         }
         return codigo_libro;
     }
-
+    /**
+     * Para conseguir el titulo en base a un codigo de la base de datos
+     *
+     * @return lista del objeto Prestamo
+     */
     public static String tituloPorCodigo(Integer codigoLibro) {
         String titulo = "";
         try {
@@ -227,7 +281,12 @@ public class LibroDAO {
         }
         return titulo;
     }
-
+    /**
+     * Consulta para actualizar el estado de un libro en la base de datos
+     *
+     * @param estado
+     * @param codigo
+     */
    public static void actualizarEstadoLibro(String estado, Integer codigo) {
         int lineas = 0;
         try {

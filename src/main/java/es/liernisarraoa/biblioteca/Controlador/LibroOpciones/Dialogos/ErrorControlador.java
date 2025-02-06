@@ -17,7 +17,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Modal para cuando da error al insertar un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class ErrorControlador implements Initializable {
+    /**
+     * Atributos del archivo dialogoEstadoDevolucion.fxml
+     */
     @FXML
     public Button btnLista;
     @FXML
@@ -25,12 +34,27 @@ public class ErrorControlador implements Initializable {
     @FXML
     public Label lblTexto;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
 
+    /**
+     * Para salir de la ventana modal
+     *
+     * @param actionEvent
+     */
     public void salir(ActionEvent actionEvent) {
         ((Stage)lblTexto.getScene().getWindow()).close();
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblTexto.setText("El libro que has insertado no se\n" +
@@ -46,10 +70,20 @@ public class ErrorControlador implements Initializable {
         Tooltip.install(btnOK, tooltipVolverAniadirAlumno);
     }
 
+    /**
+     * Para las ventanas.
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Para abrir una ventana donde están todos los libros.
+     *
+     * @param actionEvent
+     */
     public void abrirListaLibros(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/listaLibros.fxml"));
         Scene scene = null;

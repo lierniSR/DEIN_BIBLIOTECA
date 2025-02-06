@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
  */
 public class HechoEliminarControlador implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout dialogoBienEliminar.fxml
      */
     @FXML
     public Label lblTexto;

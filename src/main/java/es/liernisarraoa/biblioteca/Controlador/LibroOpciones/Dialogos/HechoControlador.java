@@ -17,7 +17,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Modal para cuando insertas un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class HechoControlador implements Initializable {
+    /**
+     * Atributos del archivo dialogoEstadoDevolucion.fxml
+     */
     @FXML
     public Label lblTexto;
     @FXML
@@ -25,12 +34,27 @@ public class HechoControlador implements Initializable {
     @FXML
     public Button btnOK;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
 
+    /**
+     * Para salir de la ventana modal
+     *
+     * @param actionEvent
+     */
     public void salir(ActionEvent actionEvent) {
         ((Stage)lblTexto.getScene().getWindow()).close();
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblTexto.setText("El libro que has insertado se ha \n" +
@@ -48,10 +72,20 @@ public class HechoControlador implements Initializable {
         Tooltip.install(btnOK, tooltipVolverAniadirLibro);
     }
 
+    /**
+     * Para las ventanas.
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Para abrir la ventana donde aparecen todos los libros.
+     *
+     * @param actionEvent
+     */
     public void abrirListaLibros(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/listaLibros.fxml"));
         Scene scene = null;

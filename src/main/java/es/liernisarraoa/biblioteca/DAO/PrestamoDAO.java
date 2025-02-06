@@ -21,11 +21,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Consultas SQL para la tabla Prestamo
+ *
+ * @author Lierni Sarraoa Joaquin
+ * @version 1.0
+ */
 public class PrestamoDAO {
+    /**
+     * Atributos para la clase
+     */
     private static ConexionDB conexionDB;
     private static Stage modalStage;
     private static Scene modalScene;
 
+    /**
+     * Consulta para insertar un prestamo en la base de datos
+     *
+     * @param prestamo
+     * @return si ha ido bien o no
+     */
     public static boolean insertarPrestamo(Prestamo prestamo) {
         int lineas = 0;
         try {
@@ -73,6 +88,11 @@ public class PrestamoDAO {
         return lineas > 0;
     }
 
+    /**
+     * Para listar todos los prestamos de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<Prestamo> listaDePrestamos() {
         ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
         try {
@@ -91,6 +111,11 @@ public class PrestamoDAO {
         return prestamos;
     }
 
+    /**
+     * Consulta para eliminar un prestamo en la base de datos
+     *
+     * @param codigoLibro
+     */
     public static void eliminarPrestamoPorLibro(String codigoLibro) {
         int lineas = 0;
         try {

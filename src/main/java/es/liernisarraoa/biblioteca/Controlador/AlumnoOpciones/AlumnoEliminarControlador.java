@@ -34,7 +34,7 @@ import java.util.ResourceBundle;
  */
 public class AlumnoEliminarControlador implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout eliminarAlumno.fxml
      */
     @FXML
     public ListView<Alumno> seleccionAlumno;

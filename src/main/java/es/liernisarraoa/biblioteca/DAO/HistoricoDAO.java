@@ -20,9 +20,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Consultas SQL para la tabla HistoricoPrestamo
+ *
+ * @author Lierni Sarraoa Joaquin
+ * @version 1.0
+ */
 public class HistoricoDAO {
+    /**
+     * Atributos para la clase
+     */
     private static ConexionDB conexionDB;
 
+    /**
+     * Consulta para insertar un historico en la base de datos
+     *
+     * @param historico
+     */
     public static void insertarHistorico(HistoricoPrestamo historico) {
         int lineas = 0;
         try {
@@ -46,6 +60,11 @@ public class HistoricoDAO {
         }
     }
 
+    /**
+     * Para listar todos los historicos de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<HistoricoPrestamo> listaDelHistorial() {
         ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
         try {
@@ -64,6 +83,11 @@ public class HistoricoDAO {
         return historicos;
     }
 
+    /**
+     * Para listar todos los historicos segun el codigo de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<HistoricoPrestamo> filtrarPorCodigoLibro(Integer codigo_libro) {
         ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
         try {
@@ -83,6 +107,11 @@ public class HistoricoDAO {
         return historicos;
     }
 
+    /**
+     * Para listar todos los historicos segun el DNI de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<HistoricoPrestamo> filtrarPorDNI(String DNI) {
         ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
         try {
@@ -102,6 +131,11 @@ public class HistoricoDAO {
         return historicos;
     }
 
+    /**
+     * Para listar todos los historicos segun la fecha de prestamo de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<HistoricoPrestamo> filtrarPorFechaPrestamo(Date fechaPrestamo) {
         ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
         try {
@@ -121,6 +155,11 @@ public class HistoricoDAO {
         return historicos;
     }
 
+    /**
+     * Para listar todos los historicos segun la fecha de devolucion de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<HistoricoPrestamo> filtrarPorFechaDevolucion(Date fechaDevolucion) {
         ArrayList<HistoricoPrestamo> historicos = new ArrayList<HistoricoPrestamo>();
         try {

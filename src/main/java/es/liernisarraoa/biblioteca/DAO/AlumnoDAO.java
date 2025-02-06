@@ -21,11 +21,26 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Consultas SQL para la tabla ALumno
+ *
+ * @author Lierni Sarraoa Joaquin
+ * @version 1.0
+ */
 public class AlumnoDAO {
+    /**
+     * Atributos para la clase
+     */
     private static ConexionDB conexionDB;
     private static Stage modalStage;
     private static Scene modalScene;
 
+    /**
+     * Consulta para insertar un alumno en la base de datos
+     *
+     * @param alumno
+     * @return si ha ido bien o no
+     */
     public static boolean insertarAlumno(Alumno alumno){
         int lineas = 0;
         try {
@@ -74,6 +89,11 @@ public class AlumnoDAO {
         return lineas > 0;
     }
 
+    /**
+     * Para listar todos los alumnos de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<Alumno> listaDeAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<Alumno>();
         try {
@@ -92,6 +112,11 @@ public class AlumnoDAO {
         return alumnos;
     }
 
+    /**
+     * Consulta para actualizar un alumno en la base de datos
+     *
+     * @param alumno
+     */
     public static boolean modificarAlumno(Alumno alumno) {
         int lineas = 0;
         try {
@@ -115,6 +140,11 @@ public class AlumnoDAO {
         return lineas > 0;
     }
 
+    /**
+     * Consulta para eliminar un alumno en la base de datos
+     *
+     * @param alumno
+     */
     public static boolean eliminarAlumno(Alumno alumno) {
         int lineas = 0;
         try {
@@ -133,6 +163,11 @@ public class AlumnoDAO {
         return lineas > 0;
     }
 
+    /**
+     * Para listar todos los DNIs de la base de datos.
+     *
+     * @return lista del objeto Prestamo
+     */
     public static ArrayList<String> listaDNI(){
         ArrayList<String> alumnos = new ArrayList<String>();
         try {

@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
  */
 public class HechoModificarControlador implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout dialogoBienModificar.fxml
      */
     @FXML
     public Label lblTexto;

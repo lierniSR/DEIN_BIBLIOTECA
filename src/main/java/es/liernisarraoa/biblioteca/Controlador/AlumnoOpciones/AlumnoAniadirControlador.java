@@ -33,7 +33,7 @@ import java.util.ResourceBundle;
  */
 public class AlumnoAniadirControlador implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout aniadirAlumno.fxml
      */
     @FXML
     public TextField tfDNI;

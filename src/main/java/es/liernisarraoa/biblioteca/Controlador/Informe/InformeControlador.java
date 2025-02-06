@@ -32,7 +32,7 @@ import java.util.HashMap;
  */
 public class InformeControlador {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout informe.fxml
      */
     @FXML
     public Button btnLibro;

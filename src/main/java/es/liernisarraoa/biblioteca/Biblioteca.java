@@ -8,9 +8,24 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Clase principal del proyecto
+ *
+ * @author Lierni Sarraoa Joaquin
+ * @version 1.0
+ */
 public class Biblioteca extends Application {
+    /**
+     * Atributos para la clase
+     */
     private Stage stage;
 
+    /**
+     * Es por la herencia de Application, cuando se ejecuta esto se lanza una ventana
+     *
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
@@ -26,10 +41,20 @@ public class Biblioteca extends Application {
         controlador.setStage(this.stage);
     }
 
+    /**
+     * Es la main para que se pueda ejecutar la aplicacion.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch();
     }
 
+    /**
+     * Para las ventanas.
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

@@ -29,7 +29,16 @@ import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+/**
+ * Ventana para poder modificar un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroModificarControlador implements Initializable {
+    /**
+     * Atributos del archivo modificarLibro.fxml
+     */
     @FXML
     public ChoiceBox<Libro> seleccionLibro;
     @FXML
@@ -51,11 +60,21 @@ public class LibroModificarControlador implements Initializable {
     @FXML
     public Button btnVolver;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
     private final Integer baja = 0;
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -78,8 +97,13 @@ public class LibroModificarControlador implements Initializable {
         }
     }
 
+    /**
+     * Para poder modificar el libro seleccionado
+     *
+     * @param actionEvent
+     */
     public void modificarLibro(ActionEvent actionEvent) {
-        int nuevaBaja = cbBaja.isSelected() ? 1 : 0; // Determinar el nuevo estado
+        int nuevaBaja = cbBaja.isSelected() ? 1 : 0;
 
         if (!tfTitulo.getText().isEmpty() && !tfAutor.getText().isEmpty() && !tfEditorial.getText().isEmpty()
                 && seleccionEstado.getSelectionModel().getSelectedItem() != null) {
@@ -153,6 +177,13 @@ public class LibroModificarControlador implements Initializable {
         }
     }
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param actionEvent
+     */
     public void volverLibro(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -175,10 +206,22 @@ public class LibroModificarControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip

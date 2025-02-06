@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
  */
 public class ErrorControlador implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout dialogoError.fxml
      */
     @FXML
     public Button btnLista;

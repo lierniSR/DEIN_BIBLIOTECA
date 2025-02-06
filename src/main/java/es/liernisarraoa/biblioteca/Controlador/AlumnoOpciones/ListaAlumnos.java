@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  */
 public class ListaAlumnos implements Initializable {
     /**
-     * Atributos del layout biblioteca.fxml
+     * Atributos del layout listaAlumnos.fxml
      */
     @FXML
     public Button btnVolver;

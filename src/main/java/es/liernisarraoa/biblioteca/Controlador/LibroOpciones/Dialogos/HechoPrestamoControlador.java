@@ -17,7 +17,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Modal para cuando coges prestado un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class HechoPrestamoControlador implements Initializable {
+    /**
+     * Atributos del archivo dialogoEstadoDevolucion.fxml
+     */
     @FXML
     public Label lblTexto;
     @FXML
@@ -25,12 +34,25 @@ public class HechoPrestamoControlador implements Initializable {
     @FXML
     public Button btnOK;
 
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
 
+    /**
+     * Para salir de la ventana modal
+     *
+     * @param actionEvent
+     */
     public void salir(ActionEvent actionEvent) {
         ((Stage)lblTexto.getScene().getWindow()).close();
     }
 
+    /**
+     * Para abrir una ventana donde están todos los prestamos.
+     *
+     * @param actionEvent
+     */
     public void abrirListaPrestamo(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/listaPrestamos.fxml"));
         Scene scene = null;
@@ -53,6 +75,13 @@ public class HechoPrestamoControlador implements Initializable {
         }
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lblTexto.setText("El prestamo que has insertado se ha \n" +
@@ -69,6 +98,11 @@ public class HechoPrestamoControlador implements Initializable {
         Tooltip.install(btnOK, tooltipVolverModificarLibro);
     }
 
+    /**
+     * Para las ventanas.
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }

@@ -25,7 +25,16 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Formulario para poder prestar un libro
+ *
+ * @version 1.0
+ * @author Lierni Sarraoa Joaquin
+ */
 public class LibroPrestamoControlador implements Initializable {
+    /**
+     * Atributos del archivo listaPrestamos.fxml
+     */
     @FXML
     public ListView<Libro> seleccionLibro;
     @FXML
@@ -35,11 +44,20 @@ public class LibroPrestamoControlador implements Initializable {
     @FXML
     public Button btnVolver;
 
-
+    /**
+     * Atributos que se necesita para la clase
+     */
     private Stage stage;
     private Stage modalStage;
     private Scene modalScene;
 
+    /**
+     * Este ActionEvent es para el boton de volver.
+     * Para volver a la gestion de Libros.
+     * Layout libros.fxml y el controlador LibroControlador.
+     *
+     * @param actionEvent
+     */
     public void volverLibro(ActionEvent actionEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/libros.fxml"));
         Scene scene = null;
@@ -62,6 +80,13 @@ public class LibroPrestamoControlador implements Initializable {
         }
     }
 
+    /**
+     * Este MouseEvent es para la imagen de la casa.
+     * Para volver a la página principal.
+     * Layout biblioteca.fxml y el controlador BibliotecaControlador.
+     *
+     * @param mouseEvent
+     */
     public void volverHome(MouseEvent mouseEvent) {
         FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("biblioteca.fxml"));
         Scene scene = null;
@@ -84,10 +109,22 @@ public class LibroPrestamoControlador implements Initializable {
         }
     }
 
+    /**
+     * Este atributo es para poder cambiar de ventanas
+     *
+     * @param stage
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Es la implementacion de la interfaz Initializable.
+     * Se ejecuta cada vez que se abre esta ventana.
+     *
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Crear un Tooltip
@@ -105,6 +142,12 @@ public class LibroPrestamoControlador implements Initializable {
         seleccionLibro.getItems().addAll(LibroDAO.listarLibrosNoPrestados());
     }
 
+    /**
+     * Abre el formulario para coger prestado el libro.
+     * Layour prestamoLibroFormulario.fxml y controlador LibroPrestamoFormulario
+     *
+     * @param actionEvent
+     */
     public void prestarLibro(ActionEvent actionEvent) {
             FXMLLoader fxmlLoader = new FXMLLoader(Biblioteca.class.getResource("Libro/prestamoLibroFormulario.fxml"));
             Scene scene = null;
