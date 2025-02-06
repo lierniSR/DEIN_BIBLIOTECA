@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.5.final using JasperReports Library version 6.20.5-3efcf2e67f959db3888d79f73dde2dbd7acb4f8e  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Graficos" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="270a6510-3414-4656-9342-36f6b9e7f696">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="MariaDB"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT  
+    a.nombre AS nombreAlumno, 
+    COUNT(hp.id_prestamo) AS total_prestamos,
+    l.titulo AS tituloLibro,
+    COUNT(hp.codigo_libro) AS total_prestamosLibros
+FROM libros.alumno a
+INNER JOIN libros.historico_prestamo hp ON a.dni = hp.dni_alumno
+INNER JOIN libros.libro l ON hp.codigo_libro = l.codigo
+GROUP BY a.dni, a.nombre]]>
+	</queryString>
+	<field name="nombreAlumno" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="nombre"/>
+		<property name="com.jaspersoft.studio.field.label" value="nombreAlumno"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="alumno"/>
+	</field>
+	<field name="total_prestamos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="total_prestamos"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_prestamos"/>
+	</field>
+	<field name="tituloLibro" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="titulo"/>
+		<property name="com.jaspersoft.studio.field.label" value="tituloLibro"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="libro"/>
+	</field>
+	<field name="total_prestamosLibros" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.name" value="total_prestamosLibros"/>
+		<property name="com.jaspersoft.studio.field.label" value="total_prestamosLibros"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="0" y="13" width="340" height="33" uuid="bcf29663-c4b8-483e-a197-e5f6920fd2a2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[INFORME CON GRAFICOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="455" y="0" width="100" height="30" uuid="dd893934-26e9-41db-a5d5-f162f80beee3"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="575" splitType="Stretch">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="61" y="70" width="453" height="245" uuid="ffc28576-c158-432c-9cac-ffb2019ef538"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[""]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{nombreAlumno}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_prestamos}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<staticText>
+				<reportElement x="5" y="15" width="553" height="55" uuid="d7c7bc05-6be2-44e3-9b35-ba5bc4165367"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[GRAFICO -> LIBROS PRESTADO POR CADA ALUMNO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="325" width="553" height="55" uuid="9c1dfb97-a76e-4ee4-a4e4-e357807659dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[GRAFICO -> CUANTAS VECES SE HA PRESTADO UN LIBRO]]></text>
+			</staticText>
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement x="61" y="385" width="457" height="190" uuid="38f48aaf-aa7b-4242-8f8d-1efc970bc126"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[""]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{tituloLibro}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{total_prestamosLibros}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000"/>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="5" y="5" width="197" height="20" uuid="dde7d6fa-1512-40b8-a7ec-0834978ade10"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="438" y="5" width="80" height="20" uuid="eeaf246d-d0e3-43e0-b59c-0ac0d9f22478"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="518" y="5" width="40" height="20" uuid="55813e4e-00ed-441e-b38f-a546b3db2d7a"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

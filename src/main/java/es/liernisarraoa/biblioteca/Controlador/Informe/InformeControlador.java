@@ -88,7 +88,41 @@ public class InformeControlador {
         }
     }
 
+    /**
+     * Este ActionEvent perteneces al boton de informe con graficos
+     * Es para abrir el informe creado en JasperReport
+     *
+     * @param actionEvent
+     */
     public void abrirInformeDeGraficos(ActionEvent actionEvent) {
+        LocalDate fechaActual = LocalDate.now();
+        try {
+            // Ruta del archivo Jasper (compilado)
+            String reportPath = "C:\\DM2\\DEIN\\ProyectoFXJasper\\Biblioteca\\src\\main\\resources\\es\\liernisarraoa\\biblioteca\\JasperGraficos\\Graficos.jasper";
+
+            // Cargar el archivo Jasper
+            JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
+
+            // Configurar conexión a la base de datos
+            String dbUrl = "jdbc:mariadb://localhost:3306/libros";
+            String dbUser  = propiedades.getProperty("db.usuario");
+            String dbPassword = propiedades.getProperty("db.contrasenia");
+
+            Connection connection = DriverManager.getConnection(dbUrl, dbUser , dbPassword);
+
+            // Llenar el informe con datos
+            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, connection);
+
+            // Mostrar el informe
+            JasperViewer.viewReport(jasperPrint, false);
+
+            // Exportar a PDF (opcional)
+            JasperExportManager.exportReportToPdfFile(jasperPrint, "PDF/ReporteGraficos/reporteGraficos_" + fechaActual + ".pdf");
+
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -101,7 +135,7 @@ public class InformeControlador {
         LocalDate fechaActual = LocalDate.now();
         try {
             // Ruta del archivo Jasper (compilado)
-            String reportPath = "C:\\DM2\\DEIN\\ProyectoFXJasper\\Biblioteca\\src\\main\\resources\\es\\liernisarraoa\\biblioteca\\JasperPrestamoAlta\\PrestamoAlta.jasper";
+            String reportPath = "C:\\DM2\\DEIN\\ProyectoFXJasper\\Biblioteca\\src\\main\\resources\\es\\liernisarraoa\\biblioteca\\JasperListaAlumnosCalculos\\ListaAlumnosCalculo.jasper";
 
             // Cargar el archivo Jasper
             JasperReport jasperReport = (JasperReport) JRLoader.loadObjectFromFile(reportPath);
@@ -112,17 +146,10 @@ public class InformeControlador {
             String dbPassword = propiedades.getProperty("db.contrasenia");
 
             Connection connection = DriverManager.getConnection(dbUrl, dbUser, dbPassword);
-            if (connection != null) {
-                System.out.println("✅ Conexión exitosa a la base de datos.");
-            } else {
-                System.out.println("❌ Error al conectar a la base de datos.");
-            }
 
             // Llenar el informe con datos
             JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), connection);
 
-            // Depurar si el informe tiene datos
-            System.out.println("Número de páginas del informe: " + jasperPrint.getPages().size());
 
             // Mostrar el informe
             JasperViewer.viewReport(jasperPrint, false);
