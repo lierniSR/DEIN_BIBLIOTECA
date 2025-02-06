@@ -1,0 +1,12 @@
+module:es.liernisarraoa.biblioteca
+es.liernisarraoa.biblioteca
+es.liernisarraoa.biblioteca.Conexion
+es.liernisarraoa.biblioteca.Controlador
+es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones
+es.liernisarraoa.biblioteca.Controlador.AlumnoOpciones.Dialogos
+es.liernisarraoa.biblioteca.Controlador.Informe
+es.liernisarraoa.biblioteca.Controlador.LibroOpciones
+es.liernisarraoa.biblioteca.Controlador.LibroOpciones.Dialogos
+es.liernisarraoa.biblioteca.DAO
+es.liernisarraoa.biblioteca.Modelo
+es.liernisarraoa.biblioteca.Propiedades
